@@ -1,20 +1,26 @@
 import {loginUrl} from "./urls";
-
+import { CapacitorHttp } from '@capacitor/core';
 
 export const login = async (email: string, password: string) => {
-    const result = await fetch(loginUrl,{
+    const result = await CapacitorHttp.request({
         method: 'POST',
-        credentials: 'include',
+        url: loginUrl,
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        data: {
+            email,
+            password
+        },
+        webFetchExtra: {
+            credentials: 'include'
+        }
     })
 
-    if(result.ok) {
+    if(result.status === 200) {
+        console.log("users", "headers", result)
         return true
     }
 
-    const error = await result.json();
-    throw new Error(error.error);
+    throw new Error(result.data.error)
 }

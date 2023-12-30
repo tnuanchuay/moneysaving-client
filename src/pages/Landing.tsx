@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import Cookies from 'js-cookie';
+import React, {useCallback, useEffect, useState} from 'react';
+// import {CapacitorCookies} from '@capacitor/core';
 import {Navigate} from "react-router-dom";
+import SegmentControl from "../components/SegmentControl";
+import {CapacitorCookies} from "@capacitor/core";
 
 export const Landing: React.FC = () => {
-    const [token, setToken] = useState<string | undefined>(undefined);
+    // const [token, setToken] = useState<string | undefined>(undefined);
     const [needRedirect, setNeedRedirect] = useState<boolean>(false);
-    useEffect(() => {
-        const token = Cookies.get("token");
-        console.log(Cookies.get())
-        if (token) {
-            setToken(token);
-        }
 
-        if (!token) {
+    const getToken = useCallback(async () => {
+        const cookies = await CapacitorCookies.getCookies();
+        if (!cookies["token"]) {
             setNeedRedirect(true);
-            return
         }
+    }, [])
 
+    useEffect(() => {
+        getToken();
 
     }, []);
 

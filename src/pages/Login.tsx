@@ -25,7 +25,6 @@ export const LogIn: React.FC = () => {
             setSuccessfulLogin(true);
         }).catch((err) => {
             setSuccessfulLogin(false);
-            console.log((err as Error).stack)
             Dialog.alert({
                 title: "Login Failed",
                 message: err.message,

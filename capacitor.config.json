@@ -8,6 +8,12 @@
     "SplashScreen": {
       "launchAutoHide": true,
       "splashImmersive": false
+    },
+    "CapacitorHttp": {
+      "enabled": true
+    },
+    "CapacitorCookies": {
+      "enabled": true
     }
   }
 }
