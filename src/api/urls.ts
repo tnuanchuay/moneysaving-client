@@ -1,0 +1,1 @@
+export const loginUrl = `http://localhost:3000/api/v0/users/login`

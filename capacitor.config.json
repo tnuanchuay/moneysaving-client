@@ -1,0 +1,13 @@
+{
+  "appId": "com.binimm.moneysaving",
+  "appName": "moneysaving",
+  "bundledWebRuntime": false,
+  "webDir": "dist",
+  "hideLogs": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "splashImmersive": false
+    }
+  }
+}
