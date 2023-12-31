@@ -1,12 +1,14 @@
-import React from 'react';
+interface Props {
+    balance: number;
+}
 
-const CashBalanceCard: React.FC = () => {
+const CashBalanceCard: React.FC = (props: Props) => {
     return (
-        <div className="bg-white rounded-lg shadow-lg p-6 w-80">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-96 lg:w-4/5">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-xl font-semibold mb-2 text-red-500">Cash Balance</h2>
-                    <p className="text-gray-600">$5000.00</p>
+                    <h2 className="text-xl font-semibold mb-2">Cash Balance</h2>
+                    <p className="text-gray-600">฿ {props.balance}.00</p>
                 </div>
                 <button className="rounded-full bg-blue-500 text-white p-2 flex items-center justify-center">
                     <svg

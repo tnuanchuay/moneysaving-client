@@ -1,10 +1,16 @@
 import React from "react";
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Landing} from "./pages/Landing";
 import {LogIn} from "./pages/Login";
 import {Home} from "./pages/Home";
 
 import "./App.css";
+
+export const App: React.FC = () => {
+    return (
+        <RouterProvider router={router} />
+    )
+}
 
 export const router = createBrowserRouter([
     {
