@@ -39,11 +39,7 @@ export const Landing: React.FC = () => {
     }
 
     return (
-        <div className="grid grid-cols-12 sm:grid-cols-12 lg:grid-cols-12">
-            <div>Column 1</div>
-            <div>Column 2</div>
-            <div>Column 3</div>
-        </div>
+        <Navigate to={"/home"} />
     )
 }
 
