@@ -1,7 +1,7 @@
 import {loginUrl} from "./urls";
-import { CapacitorHttp } from '@capacitor/core';
+import {CapacitorHttp} from '@capacitor/core';
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, password: string): Promise<string> => {
     const result = await CapacitorHttp.request({
         method: 'POST',
         url: loginUrl,
@@ -18,9 +18,14 @@ export const login = async (email: string, password: string) => {
     })
 
     if(result.status === 200) {
-        console.log("users", "headers", result)
-        return true
+        console.log(result)
+        return getTokenFromCookie(result.headers["Set-Cookie"])
     }
 
     throw new Error(result.data.error)
+}
+
+const getTokenFromCookie = (setCookie: string) => {
+    console.log(setCookie)
+    return setCookie.split(";")[0].split("=")[1]
 }

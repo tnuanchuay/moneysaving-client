@@ -258,6 +258,11 @@
   resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-5.6.0.tgz"
   integrity sha512-iswpOcD5us10hIF5zS4w6k/ekW0A+2pXhDV4AHOBXR4VOkOMI8QJaavgl9JvZ/NVvVNJdEN2rOKCMNh4AH08sw==
 
+"@capacitor/preferences@^5.0.6":
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/@capacitor/preferences/-/preferences-5.0.6.tgz#96ce925001cc41272a93b6860160fb10d335cbe0"
+  integrity sha512-aDe4wGTVSAIue6XXdUFgyz7SGszxK/Ptt/iWTydMpzc1PlZXw1XTTnciM+S+SLLNZFzXlkpXT3wMnh9t0DojUA==
+
 "@capacitor/splash-screen@latest":
   version "5.0.6"
   resolved "https://registry.npmjs.org/@capacitor/splash-screen/-/splash-screen-5.0.6.tgz"

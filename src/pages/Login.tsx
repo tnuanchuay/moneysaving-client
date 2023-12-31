@@ -3,6 +3,7 @@ import { Dialog } from '@capacitor/dialog';
 
 import {login} from "../api/users";
 import {Navigate} from "react-router-dom";
+import {setObject} from "../core/preferences";
 
 export const LogIn: React.FC = () => {
     const [formData, setFormData] = React.useState({
@@ -19,17 +20,18 @@ export const LogIn: React.FC = () => {
         });
     }
 
-    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        login(formData.email, formData.password).then((response) => {
+        try{
+            const token = await login(formData.email, formData.password)
+            await setObject("token", token);
             setSuccessfulLogin(true);
-        }).catch((err) => {
-            setSuccessfulLogin(false);
+        }catch(err){
             Dialog.alert({
                 title: "Login Failed",
                 message: err.message,
             })
-        });
+        }
     }
 
     if(successfulLogin) {
