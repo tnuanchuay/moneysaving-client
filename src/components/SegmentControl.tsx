@@ -8,7 +8,7 @@ const SegmentControl = ({ segments, defaultSelected, onSegmentChange }) => {
     useEffect(() => {
         if (indicatorRef.current) {
             const index = segments.indexOf(selectedSegment);
-            const segmentWidth = indicatorRef.current.offsetWidth / segments.length;
+            const segmentWidth = indicatorRef.current.offsetWidth;
             setIndicatorPosition(segmentWidth * index);
         }
     }, [selectedSegment, segments]);
@@ -21,9 +21,9 @@ const SegmentControl = ({ segments, defaultSelected, onSegmentChange }) => {
     return (
         <div className="flex rounded-md border overflow-hidden bg-gray-200 relative">
             <div
-                className="absolute top-0 left-0 h-full bg-white transition-transform duration-300"
+                className="absolute top-0 left-0 h-full bg-white transition-transform duration-300 z-10"
                 style={{
-                    width: `${100 / segments.length}%`,
+                    width: `calc(100% / ${segments.length})`,
                     transform: `translateX(${indicatorPosition}px)`,
                 }}
             />
@@ -31,13 +31,12 @@ const SegmentControl = ({ segments, defaultSelected, onSegmentChange }) => {
                 <div
                     key={index}
                     className={`${
-                        selectedSegment === segment ? 'text-white' : 'text-gray-700'
-                    } flex-1 p-3 text-center border-r last:border-r-0 cursor-pointer ${
-                        index === 0 ? 'rounded-l-md' : index === segments.length - 1 ? 'rounded-r-md' : ''
-                    }`}
+                        selectedSegment === segment ? 'text-gray-700' : 'text-gray-700'
+                    } flex-1 p-3 text-center cursor-pointer z-20`}
                     onClick={() => handleSegmentClick(segment)}
+                    ref={selectedSegment === segment ? indicatorRef : null}
                 >
-                    <div ref={selectedSegment === segment ? indicatorRef : null}>{segment}</div>
+                    <div>{segment}</div>
                 </div>
             ))}
         </div>
