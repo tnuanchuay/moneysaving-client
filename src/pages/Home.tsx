@@ -1,15 +1,13 @@
-import React, {useCallback, useEffect} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import CashBalanceCard from "../components/CashBalanceCard";
 import {getTransactions} from "../api/transactions";
 import {Transaction} from "../app/transactions";
 import SegmentControl from "../components/SegmentControl";
-import AppHeader from "../components/AppHeader";
 import TransactionList from "../components/TransactionList";
-import transactionList from "../components/TransactionList";
 
-export const Home: React.FC = () => {
-    const [transactions, setTransactions] = React.useState<Transaction[]>([]);
-    const [filter, setFilter] = React.useState<string>("All");
+export const Home = () => {
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [filter, setFilter] = useState<string>("All");
 
     const getData = useCallback(async () => {
         const balance = await getTransactions();

@@ -6,6 +6,7 @@ import {Home} from "./pages/Home";
 
 import "./App.css";
 import AppHeader from "./components/AppHeader";
+import Menu from "./pages/Menu";
 
 export const App: React.FC = () => {
     return [
@@ -32,6 +33,13 @@ export const router = createBrowserRouter([
         element: [
             <AppHeader/>,
             <Home/>
+        ],
+    },
+    {
+        path: "menu",
+        element: [
+            <AppHeader/>,
+            <Menu/>
         ],
     },
 ]);
