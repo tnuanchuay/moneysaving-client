@@ -2,12 +2,12 @@ interface Props {
     balance: number;
 }
 
-const CashBalanceCard: React.FC = (props: Props) => {
+const CashBalanceCard = (props: Props) => {
     return (
-        <div className="bg-white rounded-lg shadow-lg p-6 w-96 lg:w-4/5">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-96 lg:w-auto">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-xl font-semibold mb-2">Cash Balance</h2>
+                    <h2 className="text-2xl font-bold mb-2">Cash Balance</h2>
                     <p className="text-gray-600">฿ {props.balance}.00</p>
                 </div>
                 <button className="rounded-full bg-blue-500 text-white p-2 flex items-center justify-center">

@@ -5,34 +5,33 @@ import {LogIn} from "./pages/Login";
 import {Home} from "./pages/Home";
 
 import "./App.css";
+import AppHeader from "./components/AppHeader";
 
 export const App: React.FC = () => {
-    return (
-        <RouterProvider router={router} />
-    )
+    return [
+        <RouterProvider router={router}/>
+    ]
 }
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: (
-            <Landing />
-        ),
+        element: [
+            <AppHeader/>,
+            <Landing/>
+        ],
     },
     {
         path: "login",
         element: (
-            <LogIn />
+            <LogIn/>
         ),
     },
     {
         path: "home",
-        element: (
-            <Home />
-        ),
-    },
-    {
-        path: "about",
-        element: <div>About</div>,
+        element: [
+            <AppHeader/>,
+            <Home/>
+        ],
     },
 ]);

@@ -41,12 +41,12 @@ export const LogIn: React.FC = () => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-200">
+        <div className="flex items-center justify-center min-h-screen bg-white">
             <div className="bg-white p-8 rounded shadow-md w-96">
-                <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">Sign in</h2>
                 <form onSubmit={onSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="username" className="block text-gray-600">Username</label>
+                        <label htmlFor="username" className="block text-lg font-bold">Username</label>
                         <input
                             className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-3 ring-1 ring-slate-200 shadow-sm"
                             type="text"
@@ -57,7 +57,7 @@ export const LogIn: React.FC = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-600">Password</label>
+                        <label htmlFor="password" className="block text-lg font-bold">Password</label>
                         <input
                             className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-3 ring-1 ring-slate-200 shadow-sm"
                             type="password"
