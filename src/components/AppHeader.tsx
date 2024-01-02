@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
-import Menu from "../pages/Menu";
+import MobileMenu, {Menu} from "../pages/MobileMenu";
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,10 +8,49 @@ const AppHeader = () => {
     const navigate = useNavigate();
     const handleClick = () => setIsMenuOpen(!isMenuOpen);
 
+    const menus: Menu[] = [
+        {
+            text: "Home",
+            url: "/home",
+        },
+        {
+            text: "Profile",
+            url: "/profile",
+        },
+        {
+            text: "Category",
+            url: "/category",
+        },
+{
+            text: "Family",
+            url: "/family",
+        },
+        {
+            text: "Logout",
+            url: "/logout",
+        },
+    ];
+
     return (
         <div>
             <header className="sticky top-0 bg-white py-4 px-6 flex justify-between items-center">
                 <div className="text-lg font-bold text-gray-800">Money Saving !</div>
+                <nav className="hidden lg:flex items-center">
+                    <ul className="flex space-x-6">
+                        {
+                            menus.map((menu) => (
+                                <li>
+                                    <button
+                                        className="text-gray-800 hover:text-gray-600 focus:outline-none"
+                                        onClick={() => navigate(menu.url)}
+                                    >
+                                        {menu.text}
+                                    </button>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </nav>
                 <button className="text-gray-800 focus:outline-none lg:hidden" onClick={handleClick}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +68,7 @@ const AppHeader = () => {
                 </button>
             </header>
             {
-                isMenuOpen && (<Menu/>)
+                isMenuOpen && (<MobileMenu Menus={menus}/>)
             }
         </div>
     );
