@@ -10,8 +10,8 @@ export const Home = () => {
     const [filter, setFilter] = useState<string>("All");
 
     const getData = useCallback(async () => {
-        const balance = await getTransactions();
-        setTransactions(balance);
+        const transactions = await getTransactions();
+        setTransactions(transactions);
     }, []);
 
     useEffect(() => {

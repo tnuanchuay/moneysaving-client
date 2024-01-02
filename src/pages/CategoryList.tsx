@@ -1,7 +1,24 @@
-const CategoryList = () => {
-    const categories = []
+import {useCallback, useEffect, useState} from "react";
+import {Category} from "../app/category";
+import {getCategories} from "../api/category";
 
-    if(categories.length === 0) {
+const CategoryList = () => {
+    const [categories, setCategories] = useState<Category[]>([])
+
+    const getCategoryCallback = useCallback(async () => {
+        try {
+            const categories = await getCategories();
+            setCategories(categories);
+        } catch {
+            console.log("error");
+        }
+    }, [])
+
+    useEffect(() => {
+        getCategoryCallback();
+    }, []);
+
+    if (categories.length === 0) {
         return (
             <div className="text-center text-gray-500 pt-5">
                 <p className="text-2xl font-semibold">No categories yet.</p>

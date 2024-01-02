@@ -1,10 +1,13 @@
 import {CapacitorHttp} from "@capacitor/core";
-import {createCategoryUrl} from "./urls";
+import {createCategoryUrl, getCategoriesUrl} from "./urls";
 
-interface CategoryRequest {
+interface CategoryResponse {
+    user_id: number
+    family_id: number
     name: string
     description: string
-    co: string
+    color: string
+    created_at: Date
 }
 
 export const createCategory = async (name: string, description: string, color: string) => {
@@ -26,6 +29,21 @@ export const createCategory = async (name: string, description: string, color: s
 
     if(result.status === 200) {
         return
+    }
+
+    throw new Error(result.data.error)
+}
+
+export const getCategories = async (): Promise<CategoryResponse[]> => {
+    const result = await CapacitorHttp.get({
+        url: getCategoriesUrl,
+        webFetchExtra: {
+            credentials: 'include'
+        }
+    })
+
+    if(result.status === 200) {
+        return result.data as CategoryResponse[]
     }
 
     throw new Error(result.data.error)
