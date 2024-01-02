@@ -11,8 +11,8 @@ interface Props {
 }
 
 const MobileMenu = (props: Props) => {
-    const menusList = props.Menus.map((menu) => (
-        <li className="flex justify-end">
+    const menusList = props.Menus.map((menu, index) => (
+        <li key={index} className="flex justify-end">
             <Link to={menu.url} className="text-xl py-2 px-4 block">{menu.text}</Link>
         </li>
     ));

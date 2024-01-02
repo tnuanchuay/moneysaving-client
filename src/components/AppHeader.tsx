@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import {useState} from "react";
-import MobileMenu, {Menu} from "../pages/MobileMenu";
+import MobileMenu, {Menu} from "./MobileMenu";
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

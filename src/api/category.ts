@@ -1,20 +1,23 @@
 import {CapacitorHttp} from "@capacitor/core";
+import {createCategoryUrl} from "./urls";
 
 interface CategoryRequest {
     name: string
     description: string
-    icon_url: string
+    co: string
 }
 
-export const createCategory = async () => {
+export const createCategory = async (name: string, description: string, color: string) => {
     const result = await CapacitorHttp.request({
         method: 'POST',
-        url: 'http://localhost:8000/api/v0/categories',
+        url: createCategoryUrl,
         headers: {
             'Content-Type': 'application/json'
         },
         data: {
-
+            name,
+            description,
+            color
         },
         webFetchExtra: {
             credentials: 'include'
@@ -22,7 +25,6 @@ export const createCategory = async () => {
     })
 
     if(result.status === 200) {
-        console.log(result)
         return
     }
 
