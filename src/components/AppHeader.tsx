@@ -68,7 +68,7 @@ const AppHeader = () => {
                 </button>
             </header>
             {
-                isMenuOpen && (<MobileMenu Menus={menus}/>)
+                isMenuOpen && (<MobileMenu Menus={menus} onLinkClicked={() => setIsMenuOpen(!isMenuOpen)} />)
             }
         </div>
     );

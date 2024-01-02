@@ -6,6 +6,7 @@ import {Home} from "./pages/Home";
 import "./App.css";
 import AppHeader from "./components/AppHeader";
 import NewCategoryForm from "./pages/NewCategoryForm";
+import CategoryList from "./pages/CategoryList";
 
 export const App: React.FC = () => {
     return [
@@ -40,5 +41,18 @@ export const router = createBrowserRouter([
             <AppHeader/>,
             <NewCategoryForm/>
         ],
+    },
+    {
+        path: "category",
+        element: [
+            <AppHeader/>,
+            <CategoryList/>
+        ]
+    },
+    {
+        path: "*",
+        element: (
+            <h1>Not Found</h1>
+        ),
     }
 ]);

@@ -1,17 +1,17 @@
-import React from 'react';
 import { Dialog } from '@capacitor/dialog';
 
 import {login} from "../api/users";
 import {Navigate} from "react-router-dom";
 import {setObject} from "../core/preferences";
+import {useState} from "react";
 
 export const LogIn: React.FC = () => {
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
 
-    const [successfulLogin, setSuccessfulLogin] = React.useState<boolean>(false);
+    const [successfulLogin, setSuccessfulLogin] = useState<boolean>(false);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({

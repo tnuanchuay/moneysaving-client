@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Navigate} from "react-router-dom";
 import {CapacitorCookies} from "@capacitor/core";
 import {getObject} from "../core/preferences";
