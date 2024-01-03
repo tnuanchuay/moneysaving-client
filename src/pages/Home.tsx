@@ -39,8 +39,8 @@ export const Home = () => {
     }
 
     return (
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 justify-center mx-6 top-3">
-            <div>
+        <div className="grid sm:grid-cols-1 lg:grid-cols-3 justify-center px-6 top-3">
+            <div className="bg-white pb-3">
                 <div className="my-3">
                     <CashBalanceCard balance={getBalance()}/>
                 </div>
@@ -50,7 +50,10 @@ export const Home = () => {
                                         setFilter(segment);
                                     }}/>
                 </div>
-                <div className="my-3">
+                <h2 className="text-2xl font-bold">Transactions</h2>
+            </div>
+            <div>
+                <div className="max-w-lg mx-auto">
                     <TransactionList transactions={getFilteredTransactions(filter)}/>
                 </div>
             </div>

@@ -18,14 +18,8 @@ export const login = async (email: string, password: string): Promise<string> =>
     })
 
     if(result.status === 200) {
-        console.log(result)
-        return getTokenFromCookie(result.headers["Set-Cookie"])
+        return
     }
 
     throw new Error(result.data.error)
-}
-
-const getTokenFromCookie = (setCookie: string) => {
-    console.log(setCookie)
-    return setCookie.split(";")[0].split("=")[1]
 }

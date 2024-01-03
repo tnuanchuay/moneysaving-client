@@ -33,8 +33,7 @@ const AppHeader = () => {
 
     return (
         <div>
-            <div className="mt-10 hidden:lg"></div>
-            <header className="sticky top-0 bg-white py-4 px-6 flex justify-between items-center">
+            <header className="bg-white py-4 px-6 flex justify-between items-center">
                 <div className="text-lg font-bold text-gray-800">Money Saving !</div>
                 <nav className="hidden lg:flex items-center">
                     <ul className="flex space-x-6">
