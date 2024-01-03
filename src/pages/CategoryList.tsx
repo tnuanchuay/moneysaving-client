@@ -1,28 +1,40 @@
-import {useCallback, useEffect, useState} from "react";
-import {Category} from "../app/category";
-import {getCategories} from "../api/category";
+import {useCallback, useEffect, useState} from "react"
+import {Category} from "../app/category"
+import {getCategories} from "../api/category"
+import FloatingButton from "../components/FloatingButton"
+import {useNavigate} from "react-router-dom"
 
 const CategoryList = () => {
     const [categories, setCategories] = useState<Category[]>([])
+const navigate = useNavigate()
 
     const getCategoryCallback = useCallback(async () => {
         try {
-            const categories = await getCategories();
-            setCategories(categories);
+            const categories = await getCategories()
+            setCategories(categories)
         } catch {
-            console.log("error");
+            console.log("error")
         }
     }, [])
 
     useEffect(() => {
-        getCategoryCallback();
-    }, []);
+        getCategoryCallback()
+    }, [])
+
+    const onClickCreateNewCategoryButton = useCallback(() => {
+        navigate("/category/new")
+    }, [])
+
+    const createNewCategoryButton = (
+        <FloatingButton onClick={onClickCreateNewCategoryButton}/>
+    )
 
     if (categories.length === 0) {
         return (
             <div className="text-center text-gray-500 pt-5">
                 <p className="text-2xl font-semibold">No categories yet.</p>
                 <p className="text-lg">Create your first category now.</p>
+                {createNewCategoryButton}
             </div>
         )
     }
@@ -55,8 +67,9 @@ const CategoryList = () => {
                     </div>
                 ))}
             </div>
+            {createNewCategoryButton}
         </div>
-    );
-};
+    )
+}
 
-export default CategoryList;
+export default CategoryList

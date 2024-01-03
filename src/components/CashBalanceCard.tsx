@@ -1,5 +1,5 @@
 interface Props {
-    balance: number;
+    balance: number
 }
 
 const CashBalanceCard = (props: Props) => {
@@ -28,7 +28,7 @@ const CashBalanceCard = (props: Props) => {
                 </button>
             </div>
         </div>
-    );
+    )
 }
 
-export default CashBalanceCard;
+export default CashBalanceCard

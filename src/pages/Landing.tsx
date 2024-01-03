@@ -1,18 +1,18 @@
-import {useCallback, useEffect, useState} from 'react';
-import {Navigate} from "react-router-dom";
-import {CapacitorCookies} from "@capacitor/core";
-import {getObject} from "../core/preferences";
+import {useCallback, useEffect, useState} from 'react'
+import {Navigate} from "react-router-dom"
+import {CapacitorCookies} from "@capacitor/core"
+import {getObject} from "../core/preferences"
 
 export const Landing: React.FC = () => {
-    const [needRedirect, setNeedRedirect] = useState<boolean>(false);
+    const [needRedirect, setNeedRedirect] = useState<boolean>(false)
 
     const getToken = useCallback(async () => {
-        const cookies = await CapacitorCookies.getCookies();
+        const cookies = await CapacitorCookies.getCookies()
         if (cookies["token"]) {
             return
         }
 
-        const token = await getObject("token");
+        const token = await getObject("token")
         if (token) {
             await CapacitorCookies.setCookie({
                 key: "token",
@@ -25,12 +25,12 @@ export const Landing: React.FC = () => {
             return
         }
 
-        setNeedRedirect(true);
+        setNeedRedirect(true)
     }, [])
 
     useEffect(() => {
-        getToken();
-    }, []);
+        getToken()
+    }, [])
 
     if (needRedirect) {
         return (

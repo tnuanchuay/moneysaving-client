@@ -1,17 +1,17 @@
 // const TransactionCard = ({ date, time, category, spender, description, amount }) => {
-import {Transaction} from "../app/transactions";
-import {format, parseISO, parseJSON} from "date-fns";
-import TransactionSpenderPicture from "./TransactionSpenderPicture";
-import TransactionDroplet from "./TransactionDroplet";
+import {Transaction} from "../app/transactions"
+import {format, parseISO, parseJSON} from "date-fns"
+import TransactionSpenderPicture from "./TransactionSpenderPicture"
+import TransactionDroplet from "./TransactionDroplet"
 
 interface Props {
-    transaction: Transaction;
+    transaction: Transaction
 }
 
 const TransactionCard = (props: Props) => {
-    const date = format(props.transaction.createdAt, 'yyyy-MM-dd');
-    const time = format(props.transaction.createdAt, 'hh:mm a');
-    const spender = props.transaction.familyId ? props.transaction.familyId : props.transaction.userId;
+    const date = format(props.transaction.createdAt, 'yyyy-MM-dd')
+    const time = format(props.transaction.createdAt, 'hh:mm a')
+    const spender = props.transaction.familyId ? props.transaction.familyId : props.transaction.userId
 
     return (
         <div className="m-1 p-2">
@@ -36,7 +36,7 @@ const TransactionCard = (props: Props) => {
             </div>
 
         </div>
-    );
-};
+    )
+}
 
-export default TransactionCard;
+export default TransactionCard

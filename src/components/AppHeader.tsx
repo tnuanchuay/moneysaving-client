@@ -1,12 +1,12 @@
-import {useNavigate} from 'react-router-dom';
-import {useState} from "react";
-import MobileMenu, {Menu} from "./MobileMenu";
+import {useNavigate} from 'react-router-dom'
+import {useState} from "react"
+import MobileMenu, {Menu} from "./MobileMenu"
 
 const AppHeader = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-    const navigate = useNavigate();
-    const handleClick = () => setIsMenuOpen(!isMenuOpen);
+    const navigate = useNavigate()
+    const handleClick = () => setIsMenuOpen(!isMenuOpen)
 
     const menus: Menu[] = [
         {
@@ -29,7 +29,7 @@ const AppHeader = () => {
             text: "Logout",
             url: "/logout",
         },
-    ];
+    ]
 
     return (
         <div>
@@ -71,7 +71,7 @@ const AppHeader = () => {
                 isMenuOpen && (<MobileMenu Menus={menus} onLinkClicked={() => setIsMenuOpen(!isMenuOpen)} />)
             }
         </div>
-    );
-};
+    )
+}
 
-export default AppHeader;
+export default AppHeader

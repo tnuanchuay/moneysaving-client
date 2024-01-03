@@ -1,15 +1,15 @@
-import {Transaction} from "../app/transactions";
-import {CapacitorHttp} from "@capacitor/core";
-import {getTransactionUrl} from "./urls";
+import {Transaction} from "../app/transactions"
+import {CapacitorHttp} from "@capacitor/core"
+import {getTransactionUrl} from "./urls"
 
 interface TransactionResponse {
-    id: number;
-    user_id: number;
-    family_id: number;
-    amount: number;
+    id: number
+    user_id: number
+    family_id: number
+    amount: number
     description:string
     category_id: number
-    created_at: string;
+    created_at: string
 
 }
 export const getTransactions = async (): Promise<Transaction[]> => {

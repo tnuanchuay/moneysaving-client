@@ -1,22 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react'
 
 const SegmentControl = ({ segments, defaultSelected, onSegmentChange }) => {
-    const [selectedSegment, setSelectedSegment] = useState(defaultSelected || segments[0]);
-    const [indicatorPosition, setIndicatorPosition] = useState(0);
-    const indicatorRef = useRef(null);
+    const [selectedSegment, setSelectedSegment] = useState(defaultSelected || segments[0])
+    const [indicatorPosition, setIndicatorPosition] = useState(0)
+    const indicatorRef = useRef(null)
 
     useEffect(() => {
         if (indicatorRef.current) {
-            const index = segments.indexOf(selectedSegment);
-            const segmentWidth = indicatorRef.current.offsetWidth;
-            setIndicatorPosition(segmentWidth * index);
+            const index = segments.indexOf(selectedSegment)
+            const segmentWidth = indicatorRef.current.offsetWidth
+            setIndicatorPosition(segmentWidth * index)
         }
-    }, [selectedSegment, segments]);
+    }, [selectedSegment, segments])
 
     const handleSegmentClick = (segment) => {
-        setSelectedSegment(segment);
-        onSegmentChange(segment);
-    };
+        setSelectedSegment(segment)
+        onSegmentChange(segment)
+    }
 
     return (
         <div className="flex rounded-md border overflow-hidden bg-gray-200 relative">
@@ -38,7 +38,7 @@ const SegmentControl = ({ segments, defaultSelected, onSegmentChange }) => {
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default SegmentControl;
+export default SegmentControl

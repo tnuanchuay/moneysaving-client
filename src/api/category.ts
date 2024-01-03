@@ -1,5 +1,5 @@
-import {CapacitorHttp} from "@capacitor/core";
-import {createCategoryUrl, getCategoriesUrl} from "./urls";
+import {CapacitorHttp} from "@capacitor/core"
+import {createCategoryUrl, getCategoriesUrl} from "./urls"
 
 interface CategoryResponse {
     user_id: number

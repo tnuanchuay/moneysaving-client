@@ -1,5 +1,5 @@
-import {loginUrl} from "./urls";
-import {CapacitorHttp} from '@capacitor/core';
+import {loginUrl} from "./urls"
+import {CapacitorHttp} from '@capacitor/core'
 
 export const login = async (email: string, password: string): Promise<string> => {
     const result = await CapacitorHttp.request({

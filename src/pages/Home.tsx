@@ -1,26 +1,26 @@
 import {useCallback, useEffect, useState} from 'react'
-import CashBalanceCard from "../components/CashBalanceCard";
-import {getTransactions} from "../api/transactions";
-import {Transaction} from "../app/transactions";
-import SegmentControl from "../components/SegmentControl";
-import TransactionList from "../components/TransactionList";
+import CashBalanceCard from "../components/CashBalanceCard"
+import {getTransactions} from "../api/transactions"
+import {Transaction} from "../app/transactions"
+import SegmentControl from "../components/SegmentControl"
+import TransactionList from "../components/TransactionList"
 
 export const Home = () => {
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const [filter, setFilter] = useState<string>("All");
+    const [transactions, setTransactions] = useState<Transaction[]>([])
+    const [filter, setFilter] = useState<string>("All")
 
     const getData = useCallback(async () => {
-        const transactions = await getTransactions();
-        setTransactions(transactions);
-    }, []);
+        const transactions = await getTransactions()
+        setTransactions(transactions)
+    }, [])
 
     useEffect(() => {
-        getData();
-    }, []);
+        getData()
+    }, [])
 
     const getBalance = () => {
         if (transactions.length === 0)
-            return 0;
+            return 0
 
         return transactions.reduce((acc, transaction) => {
             return acc + transaction.amount
@@ -29,13 +29,13 @@ export const Home = () => {
 
     const getFilteredTransactions = (filter: string) => {
         if (filter === "All")
-            return transactions;
+            return transactions
         else if (filter === "Income")
-            return transactions.filter(transaction => transaction.amount > 0);
+            return transactions.filter(transaction => transaction.amount > 0)
         else if (filter === "Expense")
-            return transactions.filter(transaction => transaction.amount < 0);
+            return transactions.filter(transaction => transaction.amount < 0)
         else
-            return transactions;
+            return transactions
     }
 
     return (
@@ -47,7 +47,7 @@ export const Home = () => {
                 <div className="my-3">
                     <SegmentControl segments={["All", "Income", "Expense"]} defaultSelected={"All"}
                                     onSegmentChange={segment => {
-                                        setFilter(segment);
+                                        setFilter(segment)
                                     }}/>
                 </div>
                 <h2 className="text-2xl font-bold">Transactions</h2>

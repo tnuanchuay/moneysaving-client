@@ -1,8 +1,8 @@
-import {Transaction} from "../app/transactions";
-import TransactionCard from "./TransactionCard";
+import {Transaction} from "../app/transactions"
+import TransactionCard from "./TransactionCard"
 
 interface Props {
-    transactions: Transaction[];
+    transactions: Transaction[]
 }
 
 const TransactionList = (props: Props) => {
@@ -12,7 +12,7 @@ const TransactionList = (props: Props) => {
                     <TransactionCard key={transaction.id} transaction={transaction}/>
                 ))}
             </ul>
-    );
-};
+    )
+}
 
-export default TransactionList;
+export default TransactionList

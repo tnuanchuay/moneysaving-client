@@ -9,7 +9,7 @@ const TransactionSpenderPicture = ({ imageUrl }) => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default TransactionSpenderPicture;
+export default TransactionSpenderPicture

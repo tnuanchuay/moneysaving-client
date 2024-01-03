@@ -1,31 +1,31 @@
-import { Dialog } from '@capacitor/dialog';
+import { Dialog } from '@capacitor/dialog'
 
-import {login} from "../api/users";
-import {Navigate} from "react-router-dom";
-import {setObject} from "../core/preferences";
-import {useState} from "react";
+import {login} from "../api/users"
+import {Navigate} from "react-router-dom"
+import {setObject} from "../core/preferences"
+import {useState} from "react"
 
 export const LogIn: React.FC = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
-    });
+    })
 
-    const [successfulLogin, setSuccessfulLogin] = useState<boolean>(false);
+    const [successfulLogin, setSuccessfulLogin] = useState<boolean>(false)
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
-        });
+        })
     }
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        event.preventDefault()
         try{
             const token = await login(formData.email, formData.password)
-            await setObject("token", token);
-            setSuccessfulLogin(true);
+            await setObject("token", token)
+            setSuccessfulLogin(true)
         }catch(err){
             Dialog.alert({
                 title: "Login Failed",
