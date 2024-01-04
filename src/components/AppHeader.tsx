@@ -1,35 +1,20 @@
 import {useNavigate} from 'react-router-dom'
 import {useState} from "react"
-import MobileMenu, {Menu} from "./MobileMenu"
+import {AppMenuList} from "../app/menu";
 
-const AppHeader = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+interface Props {
+    shouldGoBack?: () => void
+}
 
+const AppHeader = (props: Props) => {
     const navigate = useNavigate()
-    const handleClick = () => setIsMenuOpen(!isMenuOpen)
-
-    const menus: Menu[] = [
-        {
-            text: "Home",
-            url: "/home",
-        },
-        {
-            text: "Profile",
-            url: "/profile",
-        },
-        {
-            text: "Category",
-            url: "/category",
-        },
-{
-            text: "Family",
-            url: "/family",
-        },
-        {
-            text: "Logout",
-            url: "/logout",
-        },
-    ]
+    const handleClick = () => {
+        if (props.shouldGoBack) {
+            navigate(-1)
+        }else{
+            navigate("/menu")
+        }
+    }
 
     return (
         <div>
@@ -38,7 +23,7 @@ const AppHeader = () => {
                 <nav className="hidden lg:flex items-center">
                     <ul className="flex space-x-6">
                         {
-                            menus.map((menu) => (
+                            AppMenuList.map((menu) => (
                                 <li>
                                     <button
                                         className="text-gray-800 hover:text-gray-600 focus:outline-none"
@@ -67,9 +52,6 @@ const AppHeader = () => {
                     </svg>
                 </button>
             </header>
-            {
-                isMenuOpen && (<MobileMenu Menus={menus} onLinkClicked={() => setIsMenuOpen(!isMenuOpen)} />)
-            }
         </div>
     )
 }

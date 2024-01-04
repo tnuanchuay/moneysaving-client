@@ -1,11 +1,11 @@
-import {useCallback, useEffect, useState} from 'react'
+import {memo, useCallback, useEffect, useState} from 'react'
 import CashBalanceCard from "../components/CashBalanceCard"
 import {getTransactions} from "../api/transactions"
 import {Transaction} from "../app/transactions"
 import SegmentControl from "../components/SegmentControl"
 import TransactionList from "../components/TransactionList"
 
-export const Home = () => {
+export const Home = memo(() => {
     const [transactions, setTransactions] = useState<Transaction[]>([])
     const [filter, setFilter] = useState<string>("All")
 
@@ -59,4 +59,4 @@ export const Home = () => {
             </div>
         </div>
     )
-}
+});
