@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react'
 import {createCategory} from "../api/category"
-import { Dialog } from '@capacitor/dialog'
+import {Dialog} from '@capacitor/dialog'
 import {useNavigate} from "react-router-dom"
 
 const NewCategoryForm = () => {
@@ -20,7 +20,7 @@ const NewCategoryForm = () => {
     const handleColorSelect = (color) => {
         setSelectedColor(color)
     }
-    
+
     const handleGoBack = useCallback(() => {
         navigate(-1)
     }, [])
@@ -28,7 +28,7 @@ const NewCategoryForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if(name === "" || description === "" || selectedColor === "") {
+        if (name === "" || description === "" || selectedColor === "") {
             await Dialog.alert({
                 title: "Error",
                 message: "Please fill all fields",
@@ -65,65 +65,63 @@ const NewCategoryForm = () => {
     ]
 
     return (
-        <div className="w-full max-w-md mx-auto">
-            <form onSubmit={handleSubmit} className="bg-white rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                        Name:
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="name"
-                        type="text"
-                        placeholder="Category Name"
-                        value={name}
-                        onChange={handleNameChange}
-                        required={true}
-                    />
+        <form onSubmit={handleSubmit} className="bg-white rounded">
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                    Name:
+                </label>
+                <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name"
+                    type="text"
+                    placeholder="Category Name"
+                    value={name}
+                    onChange={handleNameChange}
+                    required={true}
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                    Description:
+                </label>
+                <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="description"
+                    placeholder="Category Description"
+                    value={description}
+                    onChange={handleDescriptionChange}
+                    required={true}
+                />
+            </div>
+            <div className="mb-4">
+                <p className="block text-gray-700 text-sm font-bold mb-2">Select Color:</p>
+                <div className="flex space-x-2">
+                    {colorPalette.map((color, index) => (
+                        <button
+                            key={index}
+                            type="button"
+                            className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : ''}`}
+                            onClick={() => handleColorSelect(color)}
+                        />
+                    ))}
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                        Description:
-                    </label>
-                    <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="description"
-                        placeholder="Category Description"
-                        value={description}
-                        onChange={handleDescriptionChange}
-                        required={true}
-                    />
-                </div>
-                <div className="mb-4">
-                    <p className="block text-gray-700 text-sm font-bold mb-2">Select Color:</p>
-                    <div className="flex space-x-2">
-                        {colorPalette.map((color, index) => (
-                            <button
-                                key={index}
-                                type="button"
-                                className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : ''}`}
-                                onClick={() => handleColorSelect(color)}
-                            />
-                        ))}
-                    </div>
-                </div>
-                <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">
-                    <button
-                        className="flex justify-center items-center my-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit"
-                    >
-                        Create
-                    </button>
-                    <button
-                        className="flex justify-center items-center my-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="button"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">
+                <button
+                    className="flex justify-center items-center my-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                >
+                    Create
+                </button>
+                <button
+                    className="flex justify-center items-center my-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                    onClick={handleCancel}
+                >
+                    Cancel
+                </button>
+            </div>
+        </form>
     )
 }
 

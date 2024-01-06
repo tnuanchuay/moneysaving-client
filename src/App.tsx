@@ -9,18 +9,36 @@ import NewCategoryForm from "./pages/NewCategoryForm"
 import CategoryList from "./pages/CategoryList"
 import {MenuPage} from "./pages/MenuPage";
 import NewTransactionForm from "./pages/NewTransactionForm";
+import {FamilyPage} from "./pages/Family";
+import {ReactNode} from "react";
 
 export const App = () => {
-    return [
+    return (
         <RouterProvider router={router}/>
-    ]
+    )
+}
+
+const withHeader = (shouldGoBack: boolean, element: ReactNode) => {
+    return (
+        <div>
+            <AppHeader shouldGoBack={shouldGoBack}/>
+            {element}
+        </div>
+    )
+}
+
+const withContainer = (element: JSX.Element) => {
+    return (
+        <div className="container mx-auto px-6">
+            {element}
+        </div>
+    )
 }
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: [
-            <AppHeader/>,
             <Landing/>
         ],
     },
@@ -32,38 +50,39 @@ const router = createBrowserRouter([
     },
     {
         path: "home",
-        element: [
-            <AppHeader/>,
-            <Home/>
-        ],
+        element: (
+            withHeader(false, withContainer(<Home/>))
+    ),
     },
     {
         path: "transaction/new",
-        element: [
-            <AppHeader/>,
-            <NewTransactionForm/>
-        ],
+        element: (
+            withHeader(false, withContainer(<NewTransactionForm/>))
+        ),
     },
     {
         path: "category/new",
-        element: [
-            <AppHeader/>,
-            <NewCategoryForm/>
-        ],
+        element: (
+            withHeader(false, withContainer(<NewCategoryForm/>))
+        ),
     },
     {
         path: "category",
-        element: [
-            <AppHeader/>,
-            <CategoryList/>
-        ]
+        element: (
+            withHeader(false, withContainer(<CategoryList/>))
+        )
     },
     {
         path: "/menu",
-        element: [
-            <AppHeader shouldGoBack={true}/>,
-            <MenuPage/>
-        ]
+        element: (
+            withHeader(true, withContainer(<MenuPage/>))
+        )
+    },
+    {
+        path: "/family",
+        element: (
+            withHeader(false, withContainer(<FamilyPage/>))
+        ),
     },
     {
         path: "*",

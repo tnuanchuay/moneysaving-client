@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import CashBalanceCard from "../components/CashBalanceCard"
 import SegmentControl from "../components/SegmentControl"
 import TransactionList from "../components/TransactionList"
@@ -55,8 +55,8 @@ export const Home = () => {
     }
 
     return (
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 justify-center px-6 top-3">
-            <div className="bg-white pb-3">
+        <div className="flex-col">
+            <div className="flex-col bg-white pb-3">
                 <div className="my-3">
                     <CashBalanceCard balance={getBalance()} onClickPlus={() => createNewTransaction()}/>
                 </div>
@@ -68,10 +68,8 @@ export const Home = () => {
                 </div>
                 <h2 className="text-2xl font-bold">Transactions</h2>
             </div>
-            <div>
-                <div className="max-w-lg mx-auto">
+            <div className="flex">
                     <TransactionList transactions={getFilteredTransactions(filter)}/>
-                </div>
             </div>
         </div>
     )
