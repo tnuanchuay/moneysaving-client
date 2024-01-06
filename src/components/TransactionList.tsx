@@ -8,7 +8,7 @@ interface Props {
 
 const TransactionList = (props: Props) => {
     return (
-            <ul className="grow flex-col">
+            <ul className="flex flex-col w-full">
                 {props.transactions.map((transaction) => (
                     <TransactionCard key={transaction.id} transaction={transaction}/>
                 ))}
