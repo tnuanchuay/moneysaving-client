@@ -5,3 +5,4 @@ export const createTransactionUrl = `${host}/api/v0/transactions`
 export const createCategoryUrl = `${host}/api/v0/categories`
 export const getCategoriesUrl = `${host}/api/v0/categories`
 export const getSummaryUrl = `${host}/api/v0/summary`
+export const getFamilyUrl = `${host}/api/v0/families`

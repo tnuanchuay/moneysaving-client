@@ -1,18 +1,32 @@
 import FamilyList from '../components/FamilyList';
+import {useCallback, useEffect, useState} from "react";
+import {getFamilies} from "../api/family";
+import {Family} from "../app/family";
+import Spinner from "../components/Spinner";
 
 export const FamilyPage = () => {
-    // Sample data of families (replace this with your actual data)
-    const families = [
-        {
-            name: 'Family 1',
-            description: 'Description of Family 1...',
-        },
-        {
-            name: 'Family 2',
-            description: 'Description of Family 2...',
-        },
-        // Add more families as needed
-    ];
+    const [families, setFamilies] = useState([] as Family[]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const geFamilyCallback = useCallback(async () => {
+        try {
+            const families = await getFamilies()
+            setFamilies(families)
+            setIsLoading(false)
+        } catch {
+            console.log("error")
+        }
+    }, [])
+
+    useEffect(() => {
+        geFamilyCallback()
+    }, []);
+
+    if (isLoading) {
+        return (
+            <Spinner />
+        )
+    }
 
     return (
         <div>
