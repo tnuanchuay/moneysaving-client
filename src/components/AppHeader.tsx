@@ -3,7 +3,7 @@ import {useState} from "react"
 import {AppMenuList} from "../app/menu";
 
 interface Props {
-    shouldGoBack?: () => void
+    shouldGoBack?: boolean
 }
 
 const AppHeader = (props: Props) => {

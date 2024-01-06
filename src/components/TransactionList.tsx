@@ -1,8 +1,9 @@
 import {Transaction} from "../app/transactions"
 import TransactionCard from "./TransactionCard"
+import {Summary} from "../app/summary";
 
 interface Props {
-    transactions: Transaction[]
+    transactions: Summary[]
 }
 
 const TransactionList = (props: Props) => {

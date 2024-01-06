@@ -101,21 +101,21 @@ const NewCategoryForm = () => {
                             <button
                                 key={index}
                                 type="button"
-                                className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : 'hello'}`}
+                                className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : ''}`}
                                 onClick={() => handleColorSelect(color)}
                             />
                         ))}
                     </div>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="flex justify-center items-center my-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
                     >
                         Create
                     </button>
                     <button
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="flex justify-center items-center my-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="button"
                         onClick={handleCancel}
                     >

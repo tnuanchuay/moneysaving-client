@@ -3,15 +3,18 @@ import {Category} from "../app/category"
 import {getCategories} from "../api/category"
 import FloatingButton from "../components/FloatingButton"
 import {useNavigate} from "react-router-dom"
+import Spinner from "../components/Spinner";
 
 const CategoryList = () => {
     const [categories, setCategories] = useState<Category[]>([])
-const navigate = useNavigate()
+    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const getCategoryCallback = useCallback(async () => {
         try {
             const categories = await getCategories()
             setCategories(categories)
+            setIsLoading(false)
         } catch {
             console.log("error")
         }
@@ -28,6 +31,12 @@ const navigate = useNavigate()
     const createNewCategoryButton = (
         <FloatingButton onClick={onClickCreateNewCategoryButton}/>
     )
+
+    if (isLoading) {
+        return (
+            <Spinner/>
+        )
+    }
 
     if (categories.length === 0) {
         return (

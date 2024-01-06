@@ -1,5 +1,6 @@
 interface Props {
     balance: number
+    onClickPlus: () => void
 }
 
 const CashBalanceCard = (props: Props) => {
@@ -10,7 +11,10 @@ const CashBalanceCard = (props: Props) => {
                     <h2 className="text-2xl font-bold mb-2">Cash Balance</h2>
                     <p className="text-gray-600">฿ {props.balance}.00</p>
                 </div>
-                <button className="rounded-full bg-blue-500 text-white p-2 flex items-center justify-center">
+                <button
+                    className="rounded-full bg-blue-500 text-white p-2 flex items-center justify-center"
+                    onClick={() => props.onClickPlus()}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"

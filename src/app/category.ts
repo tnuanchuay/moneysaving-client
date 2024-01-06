@@ -1,8 +1,9 @@
 export interface Category {
-    user_id: number
-    family_id: number
+    id: number
+    userId: number
+    familyId: number
     name: string
     description: string
     color: string
-    created_at: Date
+    createdAt: Date
 }

@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider, useNavigate} from "react-router-dom"
+import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import {Landing} from "./pages/Landing"
 import {LogIn} from "./pages/Login"
 import {Home} from "./pages/Home"
@@ -8,14 +8,15 @@ import AppHeader from "./components/AppHeader"
 import NewCategoryForm from "./pages/NewCategoryForm"
 import CategoryList from "./pages/CategoryList"
 import {MenuPage} from "./pages/MenuPage";
+import NewTransactionForm from "./pages/NewTransactionForm";
 
-export const App: React.FC = () => {
+export const App = () => {
     return [
         <RouterProvider router={router}/>
     ]
 }
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/",
         element: [
@@ -37,9 +38,17 @@ export const router = createBrowserRouter([
         ],
     },
     {
+        path: "transaction/new",
+        element: [
+            <AppHeader/>,
+            <NewTransactionForm/>
+        ],
+    },
+    {
         path: "category/new",
         element: [
-            <AppHeader/>, <NewCategoryForm/>
+            <AppHeader/>,
+            <NewCategoryForm/>
         ],
     },
     {
