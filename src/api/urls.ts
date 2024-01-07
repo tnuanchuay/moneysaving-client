@@ -1,5 +1,5 @@
 
-const host = "https://localhost:3000"
+const host = "https://192.168.1.127"
 export const loginUrl = `${host}/api/v0/users/login`
 export const getTransactionUrl = `${host}/api/v0/transactions`
 export const createTransactionUrl = `${host}/api/v0/transactions`
