@@ -23,8 +23,8 @@ const AppHeader = (props: Props) => {
                 <nav className="hidden lg:flex items-center">
                     <ul className="flex space-x-6">
                         {
-                            AppMenuList.map((menu) => (
-                                <li>
+                            AppMenuList.map((menu, index) => (
+                                <li key={index}>
                                     <button
                                         className="text-gray-800 hover:text-gray-600 focus:outline-none"
                                         onClick={() => navigate(menu.url)}

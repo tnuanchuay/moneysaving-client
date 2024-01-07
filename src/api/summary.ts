@@ -27,7 +27,6 @@ export const getSummary = async (): Promise<Summary[]> => {
 
     if(result.status === 200) {
         return (result.data as SummaryResponse[]).map(summary => {
-            console.log(summary)
             return ({
                 id: summary.id,
                 userId: summary.user_id,

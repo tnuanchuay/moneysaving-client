@@ -3,6 +3,7 @@ import {useCallback, useEffect, useState} from "react"
 import {createUserProfile, getUserProfile} from "../api/profile"
 import Spinner from "../components/Spinner"
 import {PlaceHolderProfilePicture} from "../components/PlaceHolderProfilePicture"
+import {Dialog} from "@capacitor/dialog";
 
 const Profile = () => {
     const [userProfile, setUserProfile] = useState<UserProfile>({} as UserProfile)
@@ -22,7 +23,10 @@ const Profile = () => {
 
             setUserProfile(newUser)
         } catch (e) {
-            console.log(e)
+            await Dialog.alert({
+                title: "Error",
+                message: "Cannot get profile.",
+            })
         } finally {
             setIsLoading(false)
         }

@@ -1,6 +1,6 @@
 import {useCallback, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {CapacitorCookies} from "@capacitor/core";
+import {CapacitorCookies, CapacitorHttp} from "@capacitor/core";
 import {clearAllObjects} from "../core/preferences";
 
 export const Logout = () => {
@@ -9,13 +9,13 @@ export const Logout = () => {
     const logoutCallback = useCallback(async () => {
         await CapacitorCookies.clearAllCookies()
         await clearAllObjects()
+        console.log(await CapacitorCookies.getCookies())
         navigate("/")
     }, [])
 
     useEffect(() => {
         logoutCallback()
     }, []);
-
 
     return (
         <div />

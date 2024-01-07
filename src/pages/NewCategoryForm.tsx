@@ -41,7 +41,10 @@ const NewCategoryForm = () => {
             await createCategory(name, description, selectedColor)
             navigate("/category")
         } catch (err) {
-            console.log(err)
+            await Dialog.alert({
+                title: "Error",
+                message: "Cannot create category.",
+            })
         }
     }
 

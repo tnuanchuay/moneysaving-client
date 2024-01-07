@@ -5,6 +5,7 @@ import {Family} from "../app/family"
 import Spinner from "../components/Spinner"
 import FloatingButton from "../components/FloatingButton"
 import {useNavigate} from "react-router-dom";
+import {Dialog} from "@capacitor/dialog";
 
 export const FamilyPage = () => {
     const [families, setFamilies] = useState([] as Family[])
@@ -17,7 +18,10 @@ export const FamilyPage = () => {
             setFamilies(families)
             setIsLoading(false)
         } catch {
-            console.log("error")
+            await Dialog.alert({
+                title: "Error",
+                message: "Cannot get family list.",
+            })
         }
     }, [])
 

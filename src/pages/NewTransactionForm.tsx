@@ -64,10 +64,9 @@ const TransactionForm = () => {
             await createTransaction(amountInt, description, selectedCategory ? selectedCategory.id : 0, selectedFamily ? selectedFamily.id : 0)
             navigate(-1)
         } catch (e) {
-            console.log(e)
             await Dialog.alert({
                 title: "Error",
-                message: e.message,
+                message: "Cannot create transaction.",
             })
         }
     }, [amount, description, selectedCategory, selectedFamily])
@@ -144,7 +143,7 @@ const TransactionForm = () => {
                 <div className="flex-col">
                     {
                         families.map((family, index) => (
-                            <div className="flex my-3 items-center">
+                            <div key={index} className="flex my-3 items-center">
                                 <button
                                     className={`flex w-8 h-8 rounded-full ${colorPalette[index % colorPalette.length]} ${selectedFamily && family.id === selectedFamily.id ? 'shadow-sm border-4 border-black' : ''}`}
                                     key={index}
@@ -173,7 +172,7 @@ const TransactionForm = () => {
                 <div className="flex-col">
                     {
                         allCategories.map((category, index) => (
-                            <div className="flex my-3 items-center">
+                            <div key={index} className="flex my-3 items-center">
                                 <button
                                     className={`flex  w-8 h-8 rounded-full ${category.color} ${selectedCategory && category.id === selectedCategory.id ? 'shadow-sm border-4 border-black' : ''}`}
                                     key={index}

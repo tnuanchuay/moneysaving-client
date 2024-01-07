@@ -13,10 +13,9 @@ export const NewFamilyForm = () => {
             await createFamily(familyName, familyDescription)
             navigate("/family")
         } catch (e) {
-            console.log(e)
-            Dialog.alert({
+            await Dialog.alert({
                 title: "Error",
-                message: e,
+                message: "Cannot create family.",
             })
         }
     }, [familyName, familyDescription])

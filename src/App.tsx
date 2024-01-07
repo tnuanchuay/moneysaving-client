@@ -1,4 +1,4 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createBrowserRouter, RouterProvider, useNavigate} from "react-router-dom"
 import {Landing} from "./pages/Landing"
 import {LogIn} from "./pages/Login"
 import {Home} from "./pages/Home"
@@ -10,11 +10,13 @@ import CategoryList from "./pages/CategoryList"
 import {MenuPage} from "./pages/MenuPage"
 import NewTransactionForm from "./pages/NewTransactionForm"
 import {FamilyPage} from "./pages/Family"
-import {ReactNode} from "react"
+import {FC, ReactNode, useCallback, useEffect} from "react"
 import Profile from "./pages/Profile"
 import {NewFamilyForm} from "./pages/NewFamilyForm"
 import {Logout} from "./pages/Logout";
 import SignUp from "./pages/Signup";
+import {CapacitorCookies} from "@capacitor/core";
+import {getObject} from "./core/preferences";
 
 export const App = () => {
     return (
@@ -39,12 +41,36 @@ const withContainer = (element: ReactNode) => {
     )
 }
 
+const CheckAuth = ({children}) => {
+    const navigate = useNavigate()
+
+    const checkAuthCallback = useCallback(async () => {
+        const cookies = await CapacitorCookies.getCookies()
+        if (!cookies["token"] || cookies["token"] === "undefined") {
+            const token = await getObject("token")
+            if (!token) {
+                navigate("/login")
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        checkAuthCallback()
+    }, []);
+
+    return (
+        <div>
+            {children}
+        </div>
+    )
+}
+
 const router = createBrowserRouter([
     {
         path: "/",
-        element: [
+        element: (
             <Landing/>
-        ],
+        ),
     },
     {
         path: "login",
@@ -55,49 +81,65 @@ const router = createBrowserRouter([
     {
         path: "home",
         element: (
-            withHeader(false, withContainer(<Home/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<Home/>))}
+            </CheckAuth>
         ),
     },
     {
         path: "transaction/new",
         element: (
-            withHeader(false, withContainer(<NewTransactionForm/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<NewTransactionForm/>))}
+            </CheckAuth>
         ),
     },
     {
         path: "category/new",
         element: (
-            withHeader(false, withContainer(<NewCategoryForm/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<NewCategoryForm/>))}
+            </CheckAuth>
         ),
     },
     {
         path: "category",
         element: (
-            withHeader(false, withContainer(<CategoryList/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<CategoryList/>))}
+            </CheckAuth>
         )
     },
     {
         path: "/menu",
         element: (
-            withHeader(true, withContainer(<MenuPage/>))
+            <CheckAuth>
+                {withHeader(true, withContainer(<MenuPage/>))}
+            </CheckAuth>
         )
     },
     {
         path: "/family",
         element: (
-            withHeader(false, withContainer(<FamilyPage/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<FamilyPage/>))}
+            </CheckAuth>
         ),
     },
     {
         path: "/family/new",
         element: (
-            withHeader(false, withContainer(<NewFamilyForm/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<NewFamilyForm/>))}
+            </CheckAuth>
         ),
     },
     {
         path: "/profile",
         element: (
-            withHeader(false, withContainer(<Profile/>))
+            <CheckAuth>
+                {withHeader(false, withContainer(<Profile/>))}
+            </CheckAuth>
         ),
     },
     {
