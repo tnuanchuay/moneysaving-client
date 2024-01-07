@@ -11,6 +11,7 @@ import {MenuPage} from "./pages/MenuPage";
 import NewTransactionForm from "./pages/NewTransactionForm";
 import {FamilyPage} from "./pages/Family";
 import {ReactNode} from "react";
+import Profile from "./pages/Profile";
 
 export const App = () => {
     return (
@@ -82,6 +83,12 @@ const router = createBrowserRouter([
         path: "/family",
         element: (
             withHeader(false, withContainer(<FamilyPage/>))
+        ),
+    },
+    {
+        path: "/profile",
+        element: (
+            withHeader(false, withContainer(<Profile/>))
         ),
     },
     {
