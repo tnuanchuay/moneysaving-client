@@ -1,6 +1,6 @@
 import {Transaction} from "../app/transactions"
 import TransactionCard from "./TransactionCard"
-import {Summary} from "../app/summary";
+import {Summary} from "../app/summary"
 
 interface Props {
     transactions: Summary[]

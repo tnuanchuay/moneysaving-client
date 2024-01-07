@@ -1,6 +1,6 @@
-import {CapacitorHttp} from "@capacitor/core";
-import {Summary} from "../app/summary";
-import {getSummaryUrl} from "./urls";
+import {CapacitorHttp} from "@capacitor/core"
+import {Summary} from "../app/summary"
+import {getSummaryUrl} from "./urls"
 
 interface SummaryResponse {
     id: number
@@ -10,9 +10,11 @@ interface SummaryResponse {
     description:string
     category_id: number
     created_at: Date
-    name: string
     category_color: string
     category_description: string
+    name: string
+    email: string
+    picture_profile: string
 }
 
 export const getSummary = async (): Promise<Summary[]> => {
@@ -34,9 +36,11 @@ export const getSummary = async (): Promise<Summary[]> => {
                 description: summary.description,
                 categoryId: summary.category_id,
                 createdAt: summary.created_at,
-                name: summary.name,
                 categoryColor: summary.category_color,
-                categoryDescription: summary.category_description
+                categoryDescription: summary.category_description,
+                name: summary.name,
+                email: summary.email,
+                pictureProfile: summary.picture_profile
             })
         })
     }

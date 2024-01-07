@@ -1,14 +1,15 @@
 import {useCallback, useEffect, useState} from 'react'
-import {Navigate} from "react-router-dom"
-import {CapacitorCookies} from "@capacitor/core"
+import {Navigate, useNavigate} from "react-router-dom"
+import {CapacitorCookies, CapacitorHttp} from "@capacitor/core"
 import {getObject} from "../core/preferences"
 
-export const Landing: React.FC = () => {
-    const [needRedirect, setNeedRedirect] = useState<boolean>(false)
+export const Landing = () => {
+    const navigate = useNavigate()
 
     const getToken = useCallback(async () => {
         const cookies = await CapacitorCookies.getCookies()
-        if (cookies["token"]) {
+        if (cookies["token"] && cookies["token"] !== "undefined") {
+            navigate("/home")
             return
         }
 
@@ -22,24 +23,19 @@ export const Landing: React.FC = () => {
                 expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365).toString(),
             })
 
+            navigate("/home")
             return
         }
 
-        setNeedRedirect(true)
+        navigate("/login")
     }, [])
 
     useEffect(() => {
         getToken()
     }, [])
 
-    if (needRedirect) {
-        return (
-            <Navigate to={"/login"} />
-        )
-    }
-
     return (
-        <Navigate to={"/home"} />
+        <div />
     )
 }
 

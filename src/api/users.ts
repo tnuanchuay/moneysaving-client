@@ -1,5 +1,5 @@
 import {loginUrl} from "./urls"
-import {CapacitorHttp} from '@capacitor/core'
+import {CapacitorCookies, CapacitorHttp} from '@capacitor/core'
 
 export const login = async (email: string, password: string): Promise<string> => {
     const result = await CapacitorHttp.request({
@@ -18,7 +18,8 @@ export const login = async (email: string, password: string): Promise<string> =>
     })
 
     if(result.status === 200) {
-        return
+        const cookies = await CapacitorCookies.getCookies()
+        return cookies["token"]
     }
 
     throw new Error(result.data.error)

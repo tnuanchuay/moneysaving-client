@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 import {useState} from "react"
-import {AppMenuList} from "../app/menu";
+import {AppMenuList} from "../app/menu"
 
 interface Props {
     shouldGoBack?: boolean
