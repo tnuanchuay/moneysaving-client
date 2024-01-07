@@ -7,7 +7,9 @@ import {createTransaction} from "../api/transactions"
 import {stringToNumber} from "../app/stringutils"
 import {Dialog} from "@capacitor/dialog"
 
+type TransactionType = "income" | "expense"
 const TransactionForm = () => {
+    const [transactionType, setTransactionType] = useState<TransactionType>('income')
     const [allCategories, setCategories] = useState([] as Category[])
     const [isLoading, setIsLoading] = useState(true)
     const [amount, setAmount] = useState('')
@@ -28,7 +30,7 @@ const TransactionForm = () => {
 
     const createTransactionCallback = useCallback(async () => {
         try {
-            const amountInt = stringToNumber(amount)
+            const amountInt = Math.abs(stringToNumber(amount)) * (transactionType === "income" ? 1 : -1)
             await createTransaction(amountInt, description, selectedCategory ? selectedCategory.id : null)
             navigate(-1)
         } catch (e) {
@@ -64,12 +66,30 @@ const TransactionForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <div className="flex justify-between">
+                <div className="flex my-3 items-center">
+                    <button
+                        className={`w-8 h-8 rounded-full bg-green-500 ${transactionType === "income" ? 'shadow-sm border-4 border-black' : ''}`}
+                        type="button"
+                        onClick={() => setTransactionType("income")}
+                    />
+                    <p className="text text-lg mx-3">Income</p>
+                </div>
+                <div className="flex my-3 items-center">
+                    <button
+                        className={`w-8 h-8 rounded-full bg-red-500 ${transactionType === "expense" ? 'shadow-sm border-4 border-black' : ''}`}
+                        type="button"
+                        onClick={() => setTransactionType("expense")}
+                    />
+                    <p className="text text-lg mx-3">Expense</p>
+                </div>
+            </div>
             <div className="mb-4">
                 <label htmlFor="amount" className="block text-gray-700 font-bold mb-2">
                     Amount
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     id="amount"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}

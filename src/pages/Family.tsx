@@ -31,10 +31,24 @@ export const FamilyPage = () => {
         )
     }
 
+    const createNewFamilyButton = (
+        <FloatingButton onClick={() => navigate("/family/new")}/>
+    )
+
+    if (families.length === 0) {
+        return (
+            <div className="text-center text-gray-500 pt-5">
+                <p className="text-2xl font-semibold">You are not in any family.</p>
+                <p className="text-lg">Create a new family now.</p>
+                {createNewFamilyButton}
+            </div>
+        )
+    }
+
     return (
         <div>
             <FamilyList families={families} />
-            <FloatingButton onClick={() => navigate("/family/new")}/>
+            {createNewFamilyButton}
         </div>
     )
 }
