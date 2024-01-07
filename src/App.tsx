@@ -13,6 +13,7 @@ import {FamilyPage} from "./pages/Family"
 import {ReactNode} from "react"
 import Profile from "./pages/Profile"
 import {NewFamilyForm} from "./pages/NewFamilyForm"
+import {Logout} from "./pages/Logout";
 
 export const App = () => {
     return (
@@ -96,6 +97,12 @@ const router = createBrowserRouter([
         path: "/profile",
         element: (
             withHeader(false, withContainer(<Profile/>))
+        ),
+    },
+    {
+        path: "/logout",
+        element: (
+            <Logout/>
         ),
     },
     {

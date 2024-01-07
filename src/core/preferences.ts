@@ -13,3 +13,7 @@ export const getObject = async (key: string): Promise<string> => {
     const result = await Preferences.get({key: key})
     return result.value
 }
+
+export const clearAllObjects = async () => {
+    await Preferences.clear()
+}
