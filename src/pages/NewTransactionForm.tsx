@@ -6,6 +6,8 @@ import Spinner from "../components/Spinner"
 import {createTransaction} from "../api/transactions"
 import {stringToNumber} from "../app/stringutils"
 import {Dialog} from "@capacitor/dialog"
+import {Family} from "../app/family";
+import {getFamilies} from "../api/family";
 
 type TransactionType = "income" | "expense"
 const TransactionForm = () => {
@@ -15,23 +17,51 @@ const TransactionForm = () => {
     const [amount, setAmount] = useState('')
     const [description, setDescription] = useState('')
     const [selectedCategory, setSelectedCategory] = useState(null as Category)
+    const [families, setFamilies] = useState([] as Family[])
+    const [selectedFamily, setSelectedFamily] = useState(null as Family)
 
     const navigate = useNavigate()
+
+    const colorPalette = [
+        'bg-indigo-400',
+        'bg-pink-400',
+        'bg-purple-400',
+        'bg-yellow-400',
+        'bg-green-400',
+        'bg-blue-400',
+        'bg-red-400',
+    ]
 
     const getCategoryCallback = useCallback(async () => {
         try {
             const categories = await getCategories()
             setCategories(categories)
-            setIsLoading(false)
-        } catch {
-            console.log("error")
+        } catch (e) {
+            await Dialog.alert({
+                title: "Error",
+                message: e.message,
+
+            })
+        }
+    }, [])
+
+    const getFamilyCallback = useCallback(async () => {
+        try {
+            const family = await getFamilies()
+            setFamilies(family)
+        } catch (e) {
+            await Dialog.alert({
+                title: "Error",
+                message: e.message,
+
+            })
         }
     }, [])
 
     const createTransactionCallback = useCallback(async () => {
         try {
             const amountInt = Math.abs(stringToNumber(amount)) * (transactionType === "income" ? 1 : -1)
-            await createTransaction(amountInt, description, selectedCategory ? selectedCategory.id : null)
+            await createTransaction(amountInt, description, selectedCategory ? selectedCategory.id : 0, selectedFamily ? selectedFamily.id : 0)
             navigate(-1)
         } catch (e) {
             console.log(e)
@@ -40,20 +70,17 @@ const TransactionForm = () => {
                 message: e.message,
             })
         }
-    }, [amount, description, selectedCategory])
+    }, [amount, description, selectedCategory, selectedFamily])
 
     useEffect(() => {
         getCategoryCallback()
+        getFamilyCallback()
+        setIsLoading(false)
     }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Submitted:', {amount, description, category: selectedCategory})
         createTransactionCallback()
-    }
-
-    const onSelectCategory = (category: Category) => {
-        setSelectedCategory(category)
     }
 
     const handleGoBack = useCallback(() => {
@@ -110,7 +137,36 @@ const TransactionForm = () => {
                     placeholder="Enter description"
                 />
             </div>
-            <div className="mb-4">
+            {families.length > 0 ? (<div className="mb-4">
+                <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
+                    Family
+                </label>
+                <div className="flex-col">
+                    {
+                        families.map((family, index) => (
+                            <div className="flex my-3 items-center">
+                                <button
+                                    className={`flex w-8 h-8 rounded-full ${colorPalette[index % colorPalette.length]} ${selectedFamily && family.id === selectedFamily.id ? 'shadow-sm border-4 border-black' : ''}`}
+                                    key={index}
+                                    type="button"
+                                    onClick={() => setSelectedFamily(family)}
+                                />
+                                <p className="text text-lg mx-3">{family.name}</p>
+                            </div>
+                        ))
+                    }
+                    <div className="flex my-3 items-center">
+                        <button
+                            className={`flex w-8 h-8 rounded-full bg-black ${selectedFamily === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
+                            key={0}
+                            type="button"
+                            onClick={() => setSelectedFamily(null)}
+                        />
+                        <p className="text text-lg mx-3">Personal</p>
+                    </div>
+                </div>
+            </div>) : null}
+            {allCategories.length > 0 ? (<div className="mb-4">
                 <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
                     Category
                 </label>
@@ -122,7 +178,7 @@ const TransactionForm = () => {
                                     className={`flex  w-8 h-8 rounded-full ${category.color} ${selectedCategory && category.id === selectedCategory.id ? 'shadow-sm border-4 border-black' : ''}`}
                                     key={index}
                                     type="button"
-                                    onClick={() => onSelectCategory(category)}
+                                    onClick={() => setSelectedCategory(category)}
                                 />
                                 <p className="text text-lg mx-3">{category.name}</p>
                             </div>
@@ -133,12 +189,12 @@ const TransactionForm = () => {
                             className={`flex  w-8 h-8 rounded-full bg-black ${selectedCategory === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
                             key={0}
                             type="button"
-                            onClick={() => onSelectCategory(null)}
+                            onClick={() => setSelectedCategory(null)}
                         />
                         <p className="text text-lg mx-3">Not in any category</p>
                     </div>
                 </div>
-            </div>
+            </div>) : null}
             <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">
                 <button
                     className="flex justify-center items-center my-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"

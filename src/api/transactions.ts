@@ -35,7 +35,7 @@ export const getTransactions = async (): Promise<Transaction[]> => {
     throw new Error(result.data.error)
 }
 
-export const createTransaction = async (amount: number, description: string, categoryId: number) => {
+export const createTransaction = async (amount: number, description: string, categoryId: number, familyId: number) => {
     const result = await CapacitorHttp.request({
         method: 'POST',
         url: createTransactionUrl,
@@ -45,7 +45,8 @@ export const createTransaction = async (amount: number, description: string, cat
         data: {
             amount : amount as number,
             description : description,
-            category_id : categoryId ? categoryId : 0
+            category_id : categoryId,
+            family_id: familyId
         },
         webFetchExtra: {
             credentials: 'include'
