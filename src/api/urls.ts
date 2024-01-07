@@ -1,4 +1,4 @@
-gconst host = ""
+const host = ""
 export const loginUrl = `${host}/api/v0/users/login`
 export const getTransactionUrl = `${host}/api/v0/transactions`
 export const createTransactionUrl = `${host}/api/v0/transactions`
