@@ -1,4 +1,4 @@
-import {Menu} from "../components/MobileMenu";
+import {Menu} from "../components/MobileMenu"
 
 export const AppMenuList: Menu[] = [
     {

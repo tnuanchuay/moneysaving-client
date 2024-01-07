@@ -1,12 +1,15 @@
-import FamilyList from '../components/FamilyList';
-import {useCallback, useEffect, useState} from "react";
-import {getFamilies} from "../api/family";
-import {Family} from "../app/family";
-import Spinner from "../components/Spinner";
+import FamilyList from '../components/FamilyList'
+import {useCallback, useEffect, useState} from "react"
+import {getFamilies} from "../api/family"
+import {Family} from "../app/family"
+import Spinner from "../components/Spinner"
+import FloatingButton from "../components/FloatingButton"
+import {useNavigate} from "react-router-dom";
 
 export const FamilyPage = () => {
-    const [families, setFamilies] = useState([] as Family[]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [families, setFamilies] = useState([] as Family[])
+    const [isLoading, setIsLoading] = useState(true)
+    const navigate = useNavigate()
 
     const geFamilyCallback = useCallback(async () => {
         try {
@@ -20,7 +23,7 @@ export const FamilyPage = () => {
 
     useEffect(() => {
         geFamilyCallback()
-    }, []);
+    }, [])
 
     if (isLoading) {
         return (
@@ -31,6 +34,7 @@ export const FamilyPage = () => {
     return (
         <div>
             <FamilyList families={families} />
+            <FloatingButton onClick={() => navigate("/family/new")}/>
         </div>
-    );
-};
+    )
+}

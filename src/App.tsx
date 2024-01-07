@@ -7,11 +7,12 @@ import "./App.css"
 import AppHeader from "./components/AppHeader"
 import NewCategoryForm from "./pages/NewCategoryForm"
 import CategoryList from "./pages/CategoryList"
-import {MenuPage} from "./pages/MenuPage";
-import NewTransactionForm from "./pages/NewTransactionForm";
-import {FamilyPage} from "./pages/Family";
-import {ReactNode} from "react";
-import Profile from "./pages/Profile";
+import {MenuPage} from "./pages/MenuPage"
+import NewTransactionForm from "./pages/NewTransactionForm"
+import {FamilyPage} from "./pages/Family"
+import {ReactNode} from "react"
+import Profile from "./pages/Profile"
+import {NewFamilyForm} from "./pages/NewFamilyForm"
 
 export const App = () => {
     return (
@@ -28,7 +29,7 @@ const withHeader = (shouldGoBack: boolean, element: ReactNode) => {
     )
 }
 
-const withContainer = (element: JSX.Element) => {
+const withContainer = (element: ReactNode) => {
     return (
         <div className="container mx-auto px-6">
             {element}
@@ -83,6 +84,12 @@ const router = createBrowserRouter([
         path: "/family",
         element: (
             withHeader(false, withContainer(<FamilyPage/>))
+        ),
+    },
+    {
+        path: "/family/new",
+        element: (
+            withHeader(false, withContainer(<NewFamilyForm/>))
         ),
     },
     {

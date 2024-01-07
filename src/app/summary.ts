@@ -6,7 +6,9 @@ export interface Summary {
     description:string
     categoryId: number
     createdAt: Date
-    name: string
     categoryColor: string
     categoryDescription: string
+    name: string
+    email: string
+    pictureProfile: string
 }

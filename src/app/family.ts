@@ -4,3 +4,7 @@ export interface Family {
     description: string
     createdAt: Date
 }
+
+export interface FamilyInviteLink {
+    url: string
+}

@@ -1,6 +1,6 @@
-import {UserProfile} from "../app/user";
-import {getUserProfileUrl} from "./urls";
-import {CapacitorHttp} from "@capacitor/core";
+import {UserProfile} from "../app/user"
+import {getUserProfileUrl} from "./urls"
+import {CapacitorHttp} from "@capacitor/core"
 
 interface UserProfileResponse {
     name: string

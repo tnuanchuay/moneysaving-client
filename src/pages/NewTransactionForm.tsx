@@ -1,20 +1,20 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {createCategory, getCategories} from "../api/category";
-import {Category} from "../app/category";
-import Spinner from "../components/Spinner";
-import {createTransaction} from "../api/transactions";
-import {stringToNumber} from "../app/stringutils";
-import {Dialog} from "@capacitor/dialog";
+import {useCallback, useEffect, useState} from 'react'
+import {useNavigate} from "react-router-dom"
+import {createCategory, getCategories} from "../api/category"
+import {Category} from "../app/category"
+import Spinner from "../components/Spinner"
+import {createTransaction} from "../api/transactions"
+import {stringToNumber} from "../app/stringutils"
+import {Dialog} from "@capacitor/dialog"
 
 const TransactionForm = () => {
-    const [allCategories, setCategories] = useState([] as Category[]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [amount, setAmount] = useState('');
-    const [description, setDescription] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState(null as Category);
+    const [allCategories, setCategories] = useState([] as Category[])
+    const [isLoading, setIsLoading] = useState(true)
+    const [amount, setAmount] = useState('')
+    const [description, setDescription] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState(null as Category)
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const getCategoryCallback = useCallback(async () => {
         try {
@@ -42,16 +42,16 @@ const TransactionForm = () => {
 
     useEffect(() => {
         getCategoryCallback()
-    }, []);
+    }, [])
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Submitted:', {amount, description, category: selectedCategory});
+        e.preventDefault()
+        console.log('Submitted:', {amount, description, category: selectedCategory})
         createTransactionCallback()
-    };
+    }
 
     const onSelectCategory = (category: Category) => {
-        setSelectedCategory(category);
+        setSelectedCategory(category)
     }
 
     const handleGoBack = useCallback(() => {
@@ -135,7 +135,7 @@ const TransactionForm = () => {
                 </button>
             </div>
         </form>
-    );
-};
+    )
+}
 
-export default TransactionForm;
+export default TransactionForm

@@ -2,10 +2,10 @@ import {useCallback, useEffect, useState} from 'react'
 import CashBalanceCard from "../components/CashBalanceCard"
 import SegmentControl from "../components/SegmentControl"
 import TransactionList from "../components/TransactionList"
-import {getSummary} from "../api/summary";
-import {Summary} from "../app/summary";
-import Spinner from "../components/Spinner";
-import {useNavigate} from "react-router-dom";
+import {getSummary} from "../api/summary"
+import {Summary} from "../app/summary"
+import Spinner from "../components/Spinner"
+import {useNavigate} from "react-router-dom"
 
 export const Home = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -73,4 +73,4 @@ export const Home = () => {
             </div>
         </div>
     )
-};
+}

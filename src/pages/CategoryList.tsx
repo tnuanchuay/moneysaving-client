@@ -3,7 +3,7 @@ import {Category} from "../app/category"
 import {getCategories} from "../api/category"
 import FloatingButton from "../components/FloatingButton"
 import {useNavigate} from "react-router-dom"
-import Spinner from "../components/Spinner";
+import Spinner from "../components/Spinner"
 
 const CategoryList = () => {
     const [categories, setCategories] = useState<Category[]>([])

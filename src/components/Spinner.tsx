@@ -1,5 +1,5 @@
 const Spinner = () => {
-    const dotSizes = ['w-1 h-1', 'w-1.5 h-1.5', 'w-2 h-2', 'w-2.5 h-2.5', 'w-3 h-3', 'w-3.5 h-3.5', 'w-4 h-4', 'w-3 h-3'];
+    const dotSizes = ['w-1 h-1', 'w-1.5 h-1.5', 'w-2 h-2', 'w-2.5 h-2.5', 'w-3 h-3', 'w-3.5 h-3.5', 'w-4 h-4', 'w-3 h-3']
 
     return (
         <div className="h-screen w-screen flex items-center justify-center animate-spin">
@@ -15,7 +15,7 @@ const Spinner = () => {
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Spinner;
+export default Spinner

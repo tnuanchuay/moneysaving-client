@@ -1,6 +1,6 @@
 import {CapacitorHttp} from "@capacitor/core"
 import {createCategoryUrl, getCategoriesUrl} from "./urls"
-import {Category} from "../app/category";
+import {Category} from "../app/category"
 
 interface CategoryResponse {
     id: number

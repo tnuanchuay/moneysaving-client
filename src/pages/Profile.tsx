@@ -1,12 +1,13 @@
-import {UserProfile} from "../app/user";
-import {useCallback, useEffect, useState} from "react";
-import {createUserProfile, getUserProfile} from "../api/profile";
-import Spinner from "../components/Spinner";
+import {UserProfile} from "../app/user"
+import {useCallback, useEffect, useState} from "react"
+import {createUserProfile, getUserProfile} from "../api/profile"
+import Spinner from "../components/Spinner"
+import {PlaceHolderProfilePicture} from "../components/PlaceHolderProfilePicture"
 
 const Profile = () => {
     const [userProfile, setUserProfile] = useState<UserProfile>({} as UserProfile)
-    const [hover, setHover] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [hover, setHover] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const getProfileCallback = useCallback(async () => {
         try {
@@ -30,20 +31,11 @@ const Profile = () => {
 
     useEffect(() => {
         getProfileCallback()
-    }, []);
+    }, [])
 
     if (isLoading) {
         return <Spinner/>
     }
-
-    const ShadowPersonIcon = (
-        <div className="bg-white border-2 w-32 h-32 rounded-full">
-            <img alt="this is you. right ?"
-                 src={`https://avatar.iran.liara.run/public/boy?username=${userProfile.name + userProfile.email}`}
-                 onMouseEnter={() => setHover(true)}
-                 onMouseLeave={() => setHover(false)}/>
-        </div>
-    );
 
     const profilePicture = userProfile.profilePicture ? (
         <img
@@ -53,7 +45,14 @@ const Profile = () => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         />
-    ) : ShadowPersonIcon;
+    ) : (
+        <PlaceHolderProfilePicture
+            size={32}
+            name={userProfile.name}
+            email={userProfile.email}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}/>
+    )
 
     return (
         <div className="max-w-md mx-auto bg-white shadow-md rounded-md p-8 relative">
@@ -91,7 +90,7 @@ const Profile = () => {
                 </button>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Profile;
+export default Profile
