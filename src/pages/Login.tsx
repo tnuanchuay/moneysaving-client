@@ -1,7 +1,7 @@
-import { Dialog } from '@capacitor/dialog'
+import {Dialog} from '@capacitor/dialog'
 
 import {login} from "../api/users"
-import {Navigate} from "react-router-dom"
+import {Navigate, useNavigate} from "react-router-dom"
 import {setObject} from "../core/preferences"
 import {useState} from "react"
 
@@ -12,6 +12,7 @@ export const LogIn: React.FC = () => {
     })
 
     const [successfulLogin, setSuccessfulLogin] = useState<boolean>(false)
+    const navigate = useNavigate()
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -22,11 +23,11 @@ export const LogIn: React.FC = () => {
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        try{
+        try {
             const token = await login(formData.email, formData.password)
             await setObject("token", token)
             setSuccessfulLogin(true)
-        }catch(err){
+        } catch (err) {
             Dialog.alert({
                 title: "Login Failed",
                 message: err.message,
@@ -34,9 +35,9 @@ export const LogIn: React.FC = () => {
         }
     }
 
-    if(successfulLogin) {
+    if (successfulLogin) {
         return (
-            <Navigate to={"/"} />
+            <Navigate to={"/"}/>
         )
     }
 
@@ -66,12 +67,23 @@ export const LogIn: React.FC = () => {
                             onChange={onChange}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white font-bold py-2 rounded-md hover:bg-blue-600 transition duration-300"
-                    >
-                        Login
-                    </button>
+                    <div className="flex py-2">
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-500 text-white font-bold py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                        >
+                            Login
+                        </button>
+                    </div>
+                    <div className="flex py-2">
+                        <button
+                            type="button"
+                            className="w-full bg-white border-2 border-black text-black font-bold py-2 rounded-md transition duration-300"
+                            onClick={() => navigate("/signup")}
+                        >
+                            Sign Up
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import {loginUrl} from "./urls"
+import {loginUrl, signUpUrl} from "./urls"
 import {CapacitorCookies, CapacitorHttp} from '@capacitor/core'
 
 export const login = async (email: string, password: string): Promise<string> => {
@@ -20,6 +20,30 @@ export const login = async (email: string, password: string): Promise<string> =>
     if(result.status === 200) {
         const cookies = await CapacitorCookies.getCookies()
         return cookies["token"]
+    }
+
+    throw new Error(result.data.error)
+}
+
+export const signUp = async (name: string, email: string, password: string) => {
+    const result = await CapacitorHttp.request({
+        method: 'POST',
+        url: signUpUrl,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "name": name,
+            "email": email,
+            "password": password
+        },
+        webFetchExtra: {
+            credentials: 'include'
+        }
+    })
+
+    if(result.status === 201) {
+        return
     }
 
     throw new Error(result.data.error)

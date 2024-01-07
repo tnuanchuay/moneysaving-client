@@ -12,7 +12,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "twwatch": "npx tailwindcss -i src/App.css -o ./dist/output.css --watch",
-    "bns": "vite build && npx cap sync"
+    "bns": "vite build && npx cap sync",
+    "build-web": "vite build && cp -r dist/* ../moneysaving-api/dist"
   },
   "dependencies": {
     "@capacitor/camera": "latest",

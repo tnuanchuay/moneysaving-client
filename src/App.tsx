@@ -14,6 +14,7 @@ import {ReactNode} from "react"
 import Profile from "./pages/Profile"
 import {NewFamilyForm} from "./pages/NewFamilyForm"
 import {Logout} from "./pages/Logout";
+import SignUp from "./pages/Signup";
 
 export const App = () => {
     return (
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         path: "home",
         element: (
             withHeader(false, withContainer(<Home/>))
-    ),
+        ),
     },
     {
         path: "transaction/new",
@@ -103,6 +104,12 @@ const router = createBrowserRouter([
         path: "/logout",
         element: (
             <Logout/>
+        ),
+    },
+    {
+        path: "/signup",
+        element: (
+            <SignUp/>
         ),
     },
     {
