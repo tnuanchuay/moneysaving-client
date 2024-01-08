@@ -10,3 +10,5 @@ export const createFamilyUrl = `${host}/api/v0/families`
 export const getUserProfileUrl = `${host}/api/v0/users/profile`
 export const createFamilyInviteLinkUrl = `${host}/api/v0/families/invite`
 export const signUpUrl = `${host}/api/v0/users`
+export const logoutUrl = `${host}/api/v0/users/logout`
+export const resumeSessionHandler = `${host}/api/v0/users/resume`
