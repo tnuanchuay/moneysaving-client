@@ -194,15 +194,15 @@ const TransactionForm = () => {
                     </div>
                 </div>
             </div>) : null}
-            <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">
+            <div className="sticky bg-white w-full flex-cols bottom-0 right-0 left-0 p-2 items-center">
                 <button
-                    className="flex justify-center items-center my-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="flex justify-center items-center mb-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
                     Create Transaction
                 </button>
                 <button
-                    className="flex justify-center items-center my-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="flex justify-center items-center mb-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                     onClick={() => handleGoBack()}
                 >
