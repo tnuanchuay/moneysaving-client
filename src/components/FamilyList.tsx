@@ -13,16 +13,16 @@ const FamilyList = (props: Props) => {
     const copyInviteLink = useCallback(async (familyId: number) => {
         try {
             const result = await createFamilyInviteLink(familyId)
-            await Clipboard.write({
-                string: result.url
-            })
-
-            Dialog.alert({
+            await navigator.clipboard.writeText(result.url)
+            // await Clipboard.write({
+            //     string: result.url
+            // })
+            await Dialog.alert({
                 title: "Success",
                 message: "Invite link copied to clipboard",
             })
         } catch (e) {
-            Dialog.alert({
+            await Dialog.alert({
                 title: "Error",
                 message: e,
             })
