@@ -12,7 +12,7 @@ interface Props {
 
 const TransactionCard = (props: Props) => {
   const date = format(props.transaction.createdAt, "yyyy-MM-dd")
-  const time = format(props.transaction.createdAt, "hh:mm a")
+  const time = format(props.transaction.createdAt, "gh:mm")
   const spender = props.transaction.familyId
     ? props.transaction.familyId
     : props.transaction.userId
