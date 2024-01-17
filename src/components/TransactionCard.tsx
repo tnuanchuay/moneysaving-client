@@ -45,7 +45,7 @@ const TransactionCard = (props: Props) => {
             props.transaction.amount > 0 ? "text-green-600" : "text-red-600"
           }`}
         >
-          ฿ {props.transaction.amount}
+          {props.transaction.amount} ฿
         </div>
       </div>
     </div>
