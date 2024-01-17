@@ -3,9 +3,11 @@ import TransactionSpenderPicture from "./TransactionSpenderPicture"
 import TransactionDroplet from "./TransactionDroplet"
 import { Summary } from "../app/summary"
 import {PlaceHolderProfilePicture} from "./PlaceHolderProfilePicture"
+import {ReactNode} from "react";
 
 interface Props {
-  transaction: Summary
+  transaction: Summary;
+  profilePicture: ReactNode;
 }
 
 const TransactionCard = (props: Props) => {
@@ -15,16 +17,10 @@ const TransactionCard = (props: Props) => {
     ? props.transaction.familyId
     : props.transaction.userId
 
-  const profilePicture = props.transaction.pictureProfile ? (
-    <TransactionSpenderPicture imageUrl={props.transaction.pictureProfile} />
-  ) : (
-    <PlaceHolderProfilePicture size={12} name={props.transaction.name} email={props.transaction.email} />
-  )
-
   return (
     <div className="flex my-1">
       <div className="flex place-items-start">
-        {profilePicture}
+        {props.profilePicture}
           <div
             className={`h-12 w-12 rounded-full mr-2 bg-black ${props.transaction.categoryColor}`}
           ></div>
