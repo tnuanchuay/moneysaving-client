@@ -8,19 +8,24 @@ export const Landing = () => {
     const navigate = useNavigate()
 
     const getToken = useCallback(async () => {
-        const cookies = await CapacitorCookies.getCookies()
-        const attemptToken = cookies["token"]
-        if (attemptToken && attemptToken !== "undefined") {
-            await resumeSession(attemptToken)
-            navigate("/home")
-            return
-        }
+        try {
+            const cookies = await CapacitorCookies.getCookies()
+            const attemptToken = cookies["token"]
+            if (attemptToken && attemptToken !== "undefined") {
+                await resumeSession(attemptToken)
+                navigate("/home")
+                return
+            }
 
-        const anotherAttemptToken = await getObject("token")
-        if (anotherAttemptToken) {
-            await resumeSession(anotherAttemptToken)
-            navigate("/home")
-            return
+            const anotherAttemptToken = await getObject("token")
+            if (anotherAttemptToken) {
+                await resumeSession(anotherAttemptToken)
+                navigate("/home")
+                return
+            }
+        }catch
+        {
+
         }
 
         navigate("/login")

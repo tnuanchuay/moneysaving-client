@@ -1,4 +1,6 @@
-const host = "https://app.binimm.com"
+
+const host = import.meta.env.MODE === 'development' ? 'http://localhost:3000' : 'https://app.binimm.com';
+
 export const loginUrl = `${host}/api/v0/users/login`
 export const getTransactionUrl = `${host}/api/v0/transactions`
 export const createTransactionUrl = `${host}/api/v0/transactions`
