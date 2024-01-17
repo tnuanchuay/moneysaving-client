@@ -17,10 +17,13 @@ import {Logout} from "./pages/Logout";
 import SignUp from "./pages/Signup";
 import {CapacitorCookies} from "@capacitor/core";
 import {getObject} from "./core/preferences";
+import {userContext} from "./stores/userstore";
 
 export const App = () => {
     return (
-        <RouterProvider router={router}/>
+        <CheckingUserContext>
+            <RouterProvider router={router}/>
+        </CheckingUserContext>
     )
 }
 
@@ -38,6 +41,29 @@ const withContainer = (element: ReactNode) => {
         <div className="container mx-auto px-6">
             {element}
         </div>
+    )
+}
+
+const CheckingUserContext = ({children}) => {
+    const userId = userContext((state) => state.id)
+    const setUserContext = userContext((state) => state.setUserContext)
+    const callback = useCallback(async () => {
+        if (userId === 0) {
+            const prefUserId = await getObject("id")
+            if (prefUserId) {
+                setUserContext(+prefUserId)
+            }
+        }
+    }, [userId, setUserContext]);
+
+    useEffect(() => {
+        callback()
+    }, [callback]);
+
+    return (
+        <>
+            {children}
+        </>
     )
 }
 

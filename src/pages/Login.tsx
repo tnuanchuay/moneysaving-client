@@ -4,8 +4,11 @@ import {login} from "../api/users"
 import {Navigate, useNavigate} from "react-router-dom"
 import {setObject} from "../core/preferences"
 import {useState} from "react"
+import {userContext} from "../stores/userstore";
 
 export const LogIn: React.FC = () => {
+    const setUserContext = userContext((state) => state.setUserContext)
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -24,7 +27,9 @@ export const LogIn: React.FC = () => {
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
-            const token = await login(formData.email, formData.password)
+            const [id, token] = await login(formData.email, formData.password)
+            setUserContext(id)
+            await setObject("id", `${id}`)
             await setObject("token", token)
             setSuccessfulLogin(true)
         } catch (err) {
