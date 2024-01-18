@@ -17,7 +17,7 @@ import {Logout} from "./pages/Logout";
 import SignUp from "./pages/Signup";
 import {CapacitorCookies} from "@capacitor/core";
 import {getObject} from "./core/preferences";
-import {userContext} from "./stores/userstore";
+import {userContext} from "./stores/userStore";
 
 export const App = () => {
     return (

@@ -4,7 +4,7 @@ import {login} from "../api/users"
 import {Navigate, useNavigate} from "react-router-dom"
 import {setObject} from "../core/preferences"
 import {useState} from "react"
-import {userContext} from "../stores/userstore";
+import {userContext} from "../stores/userStore";
 
 export const LogIn: React.FC = () => {
     const setUserContext = userContext((state) => state.setUserContext)

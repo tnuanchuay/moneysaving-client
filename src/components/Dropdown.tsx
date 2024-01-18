@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const DropdownWithLabel = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("This week");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {

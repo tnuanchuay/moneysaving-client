@@ -1,10 +1,8 @@
 import { create } from 'zustand';
 
-
 type UserContext = {
     id: number,
     setUserContext: (id: number) => void
-
 }
 
 export const userContext = create<UserContext>((set) => ({

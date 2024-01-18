@@ -7,7 +7,7 @@ import {Summary} from "../app/summary";
 import Spinner from "../components/Spinner";
 import {useNavigate} from "react-router-dom";
 import Dropdown from "../components/Dropdown";
-import {userContext} from "../stores/userstore";
+import {userContext} from "../stores/userStore";
 
 export const Home = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
