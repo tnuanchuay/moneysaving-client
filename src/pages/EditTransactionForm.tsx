@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router-dom"
 import {createCategory, getCategories} from "../api/category"
 import {Category} from "../app/category"
 import Spinner from "../components/Spinner"
-import {createTransaction, getTransactionById, updateTransaction} from "../api/transactions"
+import {createTransaction, deleteTransaction, getTransactionById, updateTransaction} from "../api/transactions"
 import {stringToNumber} from "../app/stringutils"
 import {Dialog} from "@capacitor/dialog"
 import {Family} from "../app/family";
@@ -114,7 +114,24 @@ const EditTransactionForm = () => {
     }, [])
 
     const handleDelete = useCallback(async () => {
-
+        Dialog.confirm({
+            title: "Delete Record",
+            message: "Are you sure you want to delete this record?",
+            okButtonTitle: "Delete",
+            cancelButtonTitle: "Cancel",
+        }).then(async (result) => {
+            if (result.value) {
+                try {
+                    await deleteTransaction(transaction.id)
+                    navigate(-1)
+                } catch (e) {
+                    await Dialog.alert({
+                        title: "Error",
+                        message: e.message,
+                    })
+                }
+            }
+        })
     }, [transaction])
 
     if (isLoading) {

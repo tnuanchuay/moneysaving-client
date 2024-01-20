@@ -1,6 +1,12 @@
 import {Transaction} from "../app/transactions"
 import {CapacitorHttp} from "@capacitor/core"
-import {createTransactionUrl, getTransactionByIdUrl, getTransactionUrl, updateTransactionUrl} from "./urls"
+import {
+    createTransactionUrl,
+    deleteTransactionUrl,
+    getTransactionByIdUrl,
+    getTransactionUrl,
+    updateTransactionUrl
+} from "./urls"
 
 interface TransactionResponse {
     id: number
@@ -99,6 +105,22 @@ export const updateTransaction = async (id: number, amount: number, description:
             category_id: categoryId,
             family_id: familyId
         },
+        webFetchExtra: {
+            credentials: 'include'
+        }
+    })
+
+    if (result.status === 200) {
+        return
+    }
+
+    throw new Error(result.data.error)
+}
+
+export const deleteTransaction = async (id: number) => {
+    const result = await CapacitorHttp.request({
+        method: 'DELETE',
+        url: deleteTransactionUrl(id),
         webFetchExtra: {
             credentials: 'include'
         }

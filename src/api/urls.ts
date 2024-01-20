@@ -4,6 +4,7 @@ export const loginUrl = `${host}/api/v0/users/login`
 export const getTransactionUrl = `${host}/api/v0/transactions`
 export const getTransactionByIdUrl = (id: number) => `${host}/api/v0/transactions/${id}`
 export const updateTransactionUrl = getTransactionByIdUrl
+export const deleteTransactionUrl = getTransactionByIdUrl
 export const createTransactionUrl = `${host}/api/v0/transactions`
 export const createCategoryUrl = `${host}/api/v0/categories`
 export const getCategoriesUrl = `${host}/api/v0/categories`
