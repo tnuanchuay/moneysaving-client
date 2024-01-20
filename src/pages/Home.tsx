@@ -13,15 +13,17 @@ export const Home = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [transactions, setTransactions] = useState<Summary[]>([]);
     const [filter, setFilter] = useState<string>("All");
+    const [option, setOption] = useState<string>("This week");
 
     const navigate = useNavigate();
     const userId = userContext((state) => state.id);
 
     const getData = useCallback(async () => {
-        const transactions = await getSummary();
+        const since = option === "This week" ? "w" : option === "This month" ? "m" : "y";
+        const transactions = await getSummary(since);
         setTransactions(transactions);
         setIsLoading(false);
-    }, []);
+    }, [option]);
 
     const createNewTransaction = useCallback(() => {
         navigate("/transaction/new");
@@ -29,7 +31,7 @@ export const Home = () => {
 
     useEffect(() => {
         getData();
-    }, [getData]);
+    }, [option]);
 
     const getBalance = () => {
         if (transactions.length === 0) return 0;
@@ -37,21 +39,25 @@ export const Home = () => {
         return transactions
             .filter((transaction) => transaction.userId === userId)
             .reduce((acc, transaction) => {
-                return acc + transaction.amount;
-            }, 0);
+                return acc + transaction.amount
+            }, 0)
     };
 
     const getFilteredTransactions = (filter: string) => {
-        if (filter === "All") return transactions;
+        if (filter === "All") return transactions
         else if (filter === "Income")
-            return transactions.filter((transaction) => transaction.amount > 0);
+            return transactions.filter((transaction) => transaction.amount > 0)
         else if (filter === "Expense")
-            return transactions.filter((transaction) => transaction.amount < 0);
+            return transactions.filter((transaction) => transaction.amount < 0)
         else return transactions;
     };
 
     if (isLoading) {
-        return <Spinner/>;
+        return <Spinner/>
+    }
+
+    const onSelectDropdown = (option: string) => {
+        setOption(option);
     }
 
     return (
@@ -74,12 +80,13 @@ export const Home = () => {
                 </div>
                 <h2 className="text-2xl font-bold">Transactions</h2>
                 <div className="flex my-3">
-                    <Dropdown/>
+                    <Dropdown options={["This week", "This month", "This year"]} selectedOption={option}
+                              setSelectedOption={onSelectDropdown}/>
                 </div>
             </div>
             <div className="flex">
                 <TransactionList transactions={getFilteredTransactions(filter)}/>
             </div>
         </div>
-    );
-};
+    )
+}

@@ -1,24 +1,27 @@
 import {useCallback, useEffect, useState} from 'react'
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import {createCategory, getCategories} from "../api/category"
 import {Category} from "../app/category"
 import Spinner from "../components/Spinner"
-import {createTransaction} from "../api/transactions"
+import {createTransaction, getTransactionById, updateTransaction} from "../api/transactions"
 import {stringToNumber} from "../app/stringutils"
 import {Dialog} from "@capacitor/dialog"
 import {Family} from "../app/family";
 import {getFamilies} from "../api/family";
+import {Transaction} from "../app/transactions";
 
 type TransactionType = "income" | "expense"
-const TransactionForm = () => {
+const EditTransactionForm = () => {
+    const [transaction, setTransaction] = useState<Transaction>()
     const [transactionType, setTransactionType] = useState<TransactionType>('expense')
-    const [allCategories, setCategories] = useState([] as Category[])
     const [isLoading, setIsLoading] = useState(true)
     const [amount, setAmount] = useState('')
     const [description, setDescription] = useState('')
+    const [categories, setCategories] = useState([] as Category[])
     const [selectedCategory, setSelectedCategory] = useState(null as Category)
     const [families, setFamilies] = useState([] as Family[])
     const [selectedFamily, setSelectedFamily] = useState(null as Family)
+    const {id} = useParams()
 
     const navigate = useNavigate()
 
@@ -36,6 +39,7 @@ const TransactionForm = () => {
         try {
             const categories = await getCategories()
             setCategories(categories)
+            console.log("get categories", categories)
         } catch (e) {
             await Dialog.alert({
                 title: "Error",
@@ -49,6 +53,7 @@ const TransactionForm = () => {
         try {
             const family = await getFamilies()
             setFamilies(family)
+            setSelectedFamily(families.find((family) => family.id === transaction?.familyId) || null as Family)
         } catch (e) {
             await Dialog.alert({
                 title: "Error",
@@ -58,28 +63,49 @@ const TransactionForm = () => {
         }
     }, [])
 
-    const createTransactionCallback = useCallback(async () => {
+    const getTransactionCallback = useCallback(async () => {
         try {
-            const amountInt = Math.abs(stringToNumber(amount)) * (transactionType === "income" ? 1 : -1)
-            await createTransaction(amountInt, description, selectedCategory ? selectedCategory.id : 0, selectedFamily ? selectedFamily.id : 0)
-            navigate(-1)
+            const transaction = await getTransactionById(+id)
+            setTransaction(transaction)
+            setTransactionType(transaction?.amount > 0 ? 'income' : 'expense')
+            setAmount(Math.abs(transaction?.amount || 0) + '')
+            setDescription(transaction?.description || '')
+            console.log("get transaction", transaction)
         } catch (e) {
             await Dialog.alert({
                 title: "Error",
-                message: "Cannot create transaction.",
+                message: e.message,
+
             })
         }
-    }, [amount, description, selectedCategory, selectedFamily])
+    }, [])
 
     useEffect(() => {
+        setSelectedFamily(families.find((family) => family.id === transaction?.familyId) || null as Family)
+    }, [transaction, families]);
+
+    useEffect(() => {
+        setSelectedCategory(categories.find((category) => category.id === transaction?.categoryId) || null as Category)
+    }, [transaction, categories]);
+
+    useEffect(() => {
+        getTransactionCallback()
         getCategoryCallback()
         getFamilyCallback()
         setIsLoading(false)
-    }, [getCategoryCallback, getFamilyCallback])
+    }, [])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        createTransactionCallback()
+        try{
+            await updateTransaction(transaction.id, +amount, description, selectedCategory?.id || 0, selectedFamily?.id || 0)
+            navigate(-1)
+        }catch(e) {
+            await Dialog.alert({
+                title: "Error",
+                message: e.message,
+            })
+        }
     }
 
     const handleGoBack = useCallback(() => {
@@ -165,13 +191,13 @@ const TransactionForm = () => {
                     </div>
                 </div>
             </div>) : null}
-            {allCategories.length > 0 ? (<div className="mb-4">
+            {categories.length > 0 ? (<div className="mb-4">
                 <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
                     Category
                 </label>
                 <div className="flex-col">
                     {
-                        allCategories.map((category, index) => (
+                        categories.map((category, index) => (
                             <div key={index} className="flex my-3 items-center">
                                 <button
                                     className={`flex  w-8 h-8 rounded-full ${category.color} ${selectedCategory && category.id === selectedCategory.id ? 'shadow-sm border-4 border-black' : ''}`}
@@ -199,7 +225,7 @@ const TransactionForm = () => {
                     className="flex justify-center items-center mb-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
                 >
-                    Create Transaction
+                    Update Transaction
                 </button>
                 <button
                     className="flex justify-center items-center mb-3 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -213,4 +239,4 @@ const TransactionForm = () => {
     )
 }
 
-export default TransactionForm
+export default EditTransactionForm

@@ -18,6 +18,7 @@ import SignUp from "./pages/Signup";
 import {CapacitorCookies} from "@capacitor/core";
 import {getObject} from "./core/preferences";
 import {userContext} from "./stores/userStore";
+import EditTransactionForm from "./pages/EditTransactionForm";
 
 export const App = () => {
     return (
@@ -117,6 +118,14 @@ const router = createBrowserRouter([
         element: (
             <CheckAuth>
                 {withHeader(false, withContainer(<NewTransactionForm/>))}
+            </CheckAuth>
+        ),
+    },
+    {
+        path: "transaction/:id/edit",
+        element: (
+            <CheckAuth>
+                {withHeader(false, withContainer(<EditTransactionForm/>))}
             </CheckAuth>
         ),
     },

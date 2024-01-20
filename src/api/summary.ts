@@ -17,9 +17,9 @@ interface SummaryResponse {
     picture_profile: string
 }
 
-export const getSummary = async (): Promise<Summary[]> => {
+export const getSummary = async (since?: string): Promise<Summary[]> => {
     const result = await CapacitorHttp.get({
-        url: getSummaryUrl,
+        url: getSummaryUrl(since),
         webFetchExtra: {
             credentials: 'include'
         }
