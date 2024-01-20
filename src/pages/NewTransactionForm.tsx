@@ -92,108 +92,110 @@ const TransactionForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div className="flex justify-between">
-                <div className="flex my-3 items-center">
-                    <button
-                        className={`w-8 h-8 rounded-full bg-green-500 ${transactionType === "income" ? 'shadow-sm border-4 border-black' : ''}`}
-                        type="button"
-                        onClick={() => setTransactionType("income")}
-                    />
-                    <p className="text text-lg mx-3">Income</p>
-                </div>
-                <div className="flex my-3 items-center">
-                    <button
-                        className={`w-8 h-8 rounded-full bg-red-500 ${transactionType === "expense" ? 'shadow-sm border-4 border-black' : ''}`}
-                        type="button"
-                        onClick={() => setTransactionType("expense")}
-                    />
-                    <p className="text text-lg mx-3">Expense</p>
-                </div>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="amount" className="block text-gray-700 font-bold mb-2">
-                    Amount
-                </label>
-                <input
-                    type="number"
-                    id="amount"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Enter amount"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
-                    Description
-                </label>
-                <input
-                    type="text"
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Enter description"
-                />
-            </div>
-            {families.length > 0 ? (<div className="mb-4">
-                <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
-                    Family
-                </label>
-                <div className="flex-col">
-                    {
-                        families.map((family, index) => (
-                            <div key={index} className="flex my-3 items-center">
-                                <button
-                                    className={`flex w-8 h-8 rounded-full ${colorPalette[index % colorPalette.length]} ${selectedFamily && family.id === selectedFamily.id ? 'shadow-sm border-4 border-black' : ''}`}
-                                    key={index}
-                                    type="button"
-                                    onClick={() => setSelectedFamily(family)}
-                                />
-                                <p className="text text-lg mx-3">{family.name}</p>
-                            </div>
-                        ))
-                    }
+            <div className="px-6">
+                <div className="flex justify-between">
                     <div className="flex my-3 items-center">
                         <button
-                            className={`flex w-8 h-8 rounded-full bg-black ${selectedFamily === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
-                            key={0}
+                            className={`w-8 h-8 rounded-full bg-green-500 ${transactionType === "income" ? 'shadow-sm border-4 border-black' : ''}`}
                             type="button"
-                            onClick={() => setSelectedFamily(null)}
+                            onClick={() => setTransactionType("income")}
                         />
-                        <p className="text text-lg mx-3">Personal</p>
+                        <p className="text text-lg mx-3">Income</p>
                     </div>
-                </div>
-            </div>) : null}
-            {allCategories.length > 0 ? (<div className="mb-4">
-                <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
-                    Category
-                </label>
-                <div className="flex-col">
-                    {
-                        allCategories.map((category, index) => (
-                            <div key={index} className="flex my-3 items-center">
-                                <button
-                                    className={`flex  w-8 h-8 rounded-full ${category.color} ${selectedCategory && category.id === selectedCategory.id ? 'shadow-sm border-4 border-black' : ''}`}
-                                    key={index}
-                                    type="button"
-                                    onClick={() => setSelectedCategory(category)}
-                                />
-                                <p className="text text-lg mx-3">{category.name}</p>
-                            </div>
-                        ))
-                    }
                     <div className="flex my-3 items-center">
                         <button
-                            className={`flex  w-8 h-8 rounded-full bg-black ${selectedCategory === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
-                            key={0}
+                            className={`w-8 h-8 rounded-full bg-red-500 ${transactionType === "expense" ? 'shadow-sm border-4 border-black' : ''}`}
                             type="button"
-                            onClick={() => setSelectedCategory(null)}
+                            onClick={() => setTransactionType("expense")}
                         />
-                        <p className="text text-lg mx-3">Not in any category</p>
+                        <p className="text text-lg mx-3">Expense</p>
                     </div>
                 </div>
-            </div>) : null}
+                <div className="mb-4">
+                    <label htmlFor="amount" className="block text-gray-700 font-bold mb-2">
+                        Amount
+                    </label>
+                    <input
+                        type="number"
+                        id="amount"
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Enter amount"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                        Description
+                    </label>
+                    <input
+                        type="text"
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Enter description"
+                    />
+                </div>
+                {families.length > 0 ? (<div className="mb-4">
+                    <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
+                        Family
+                    </label>
+                    <div className="flex-col">
+                        {
+                            families.map((family, index) => (
+                                <div key={index} className="flex my-3 items-center">
+                                    <button
+                                        className={`flex w-8 h-8 rounded-full ${colorPalette[index % colorPalette.length]} ${selectedFamily && family.id === selectedFamily.id ? 'shadow-sm border-4 border-black' : ''}`}
+                                        key={index}
+                                        type="button"
+                                        onClick={() => setSelectedFamily(family)}
+                                    />
+                                    <p className="text text-lg mx-3">{family.name}</p>
+                                </div>
+                            ))
+                        }
+                        <div className="flex my-3 items-center">
+                            <button
+                                className={`flex w-8 h-8 rounded-full bg-black ${selectedFamily === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
+                                key={0}
+                                type="button"
+                                onClick={() => setSelectedFamily(null)}
+                            />
+                            <p className="text text-lg mx-3">Personal</p>
+                        </div>
+                    </div>
+                </div>) : null}
+                {allCategories.length > 0 ? (<div className="mb-4">
+                    <label htmlFor="category" className="block text-gray-700 font-bold mb-2">
+                        Category
+                    </label>
+                    <div className="flex-col">
+                        {
+                            allCategories.map((category, index) => (
+                                <div key={index} className="flex my-3 items-center">
+                                    <button
+                                        className={`flex  w-8 h-8 rounded-full ${category.color} ${selectedCategory && category.id === selectedCategory.id ? 'shadow-sm border-4 border-black' : ''}`}
+                                        key={index}
+                                        type="button"
+                                        onClick={() => setSelectedCategory(category)}
+                                    />
+                                    <p className="text text-lg mx-3">{category.name}</p>
+                                </div>
+                            ))
+                        }
+                        <div className="flex my-3 items-center">
+                            <button
+                                className={`flex  w-8 h-8 rounded-full bg-black ${selectedCategory === null ? 'shadow-sm border-4 border-gray-500' : ''}`}
+                                key={0}
+                                type="button"
+                                onClick={() => setSelectedCategory(null)}
+                            />
+                            <p className="text text-lg mx-3">Not in any category</p>
+                        </div>
+                    </div>
+                </div>) : null}
+            </div>
             <div className="sticky bg-white w-full flex-cols bottom-0 right-0 left-0 p-2 items-center">
                 <button
                     className="flex justify-center items-center mb-3 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 rounded focus:outline-none focus:shadow-outline"

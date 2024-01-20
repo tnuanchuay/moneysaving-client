@@ -69,44 +69,46 @@ const NewCategoryForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="bg-white rounded">
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                    Name:
-                </label>
-                <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="name"
-                    type="text"
-                    placeholder="Category Name"
-                    value={name}
-                    onChange={handleNameChange}
-                    required={true}
-                />
-            </div>
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                    Description:
-                </label>
-                <textarea
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="description"
-                    placeholder="Category Description"
-                    value={description}
-                    onChange={handleDescriptionChange}
-                    required={true}
-                />
-            </div>
-            <div className="mb-4">
-                <p className="block text-gray-700 text-sm font-bold mb-2">Select Color:</p>
-                <div className="flex space-x-2">
-                    {colorPalette.map((color, index) => (
-                        <button
-                            key={index}
-                            type="button"
-                            className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : ''}`}
-                            onClick={() => handleColorSelect(color)}
-                        />
-                    ))}
+            <div className="px-6">
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                        Name:
+                    </label>
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="name"
+                        type="text"
+                        placeholder="Category Name"
+                        value={name}
+                        onChange={handleNameChange}
+                        required={true}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+                        Description:
+                    </label>
+                    <textarea
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="description"
+                        placeholder="Category Description"
+                        value={description}
+                        onChange={handleDescriptionChange}
+                        required={true}
+                    />
+                </div>
+                <div className="mb-4">
+                    <p className="block text-gray-700 text-sm font-bold mb-2">Select Color:</p>
+                    <div className="flex space-x-2">
+                        {colorPalette.map((color, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                className={`w-8 h-8 rounded-full ${color} ${selectedColor === color ? 'shadow-sm border-4 border-black' : ''}`}
+                                onClick={() => handleColorSelect(color)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className="absolute w-auto flex-cols bottom-0 right-0 left-0 m-4 items-center">

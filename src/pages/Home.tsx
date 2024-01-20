@@ -67,7 +67,7 @@ export const Home = () => {
     }
 
     return (
-        <div className="flex-col">
+        <div className="flex-col px-6">
             <div className="flex-col bg-white">
                 <div className="my-3">
                     <CashBalanceCard

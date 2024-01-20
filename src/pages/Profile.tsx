@@ -59,39 +59,41 @@ const Profile = () => {
     )
 
     return (
-        <div className="max-w-md mx-auto bg-white shadow-md rounded-md p-8 relative">
-            <div
-                className="flex justify-center relative"
-            >
-                <div className="relative">
-                    {profilePicture}
-                    {hover && (
-                        <div
-                            className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-50 rounded-full">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-12 w-12 text-gray-600"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                />
-                            </svg>
-                        </div>
-                    )}
+        <div className="p-6">
+            <div className="max-w-md mx-auto bg-white shadow-md rounded-md p-8 relative">
+                <div
+                    className="flex justify-center relative"
+                >
+                    <div className="relative">
+                        {profilePicture}
+                        {hover && (
+                            <div
+                                className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-50 rounded-full">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-12 w-12 text-gray-600"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    />
+                                </svg>
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-            <div className="text-center mt-4">
-                <h1 className="text-xl font-semibold">{userProfile.name}</h1>
-                <p className="text-gray-600">{userProfile.email}</p>
-                <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-                    Change Password
-                </button>
+                <div className="text-center mt-4">
+                    <h1 className="text-xl font-semibold">{userProfile.name}</h1>
+                    <p className="text-gray-600">{userProfile.email}</p>
+                    <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                        Change Password
+                    </button>
+                </div>
             </div>
         </div>
     )

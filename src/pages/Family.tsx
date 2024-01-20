@@ -50,7 +50,7 @@ export const FamilyPage = () => {
     }
 
     return (
-        <div>
+        <div className="px-6">
             <FamilyList families={families} />
             {createNewFamilyButton}
         </div>

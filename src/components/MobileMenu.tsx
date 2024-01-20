@@ -23,7 +23,7 @@ const MobileMenu = (props: Props) => {
     ))
 
     return (
-        <div className="flex flex-col bg-white">
+        <div className="flex flex-col bg-white px-6">
             <div className="items-center">
                 <nav className="justify-item-end w-full">
                     <ul>
