@@ -98,7 +98,8 @@ const EditTransactionForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            await updateTransaction(transaction.id, +amount, description, selectedCategory?.id || 0, selectedFamily?.id || 0)
+            const amountInt = Math.abs(stringToNumber(amount)) * (transactionType === "income" ? 1 : -1)
+            await updateTransaction(transaction.id, amountInt, description, selectedCategory?.id || 0, selectedFamily?.id || 0)
             navigate(-1)
         }catch(e) {
             await Dialog.alert({
