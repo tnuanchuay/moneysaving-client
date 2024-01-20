@@ -1,9 +1,10 @@
 import {useState} from "react";
+import {TimeRange} from "../app/common";
 
 interface Props {
     options: string[];
     selectedOption: string;
-    setSelectedOption: (option: string) => void;
+    setSelectedOption: (option: TimeRange) => void;
 }
 
 const DropdownWithLabel = (props: Props) => {

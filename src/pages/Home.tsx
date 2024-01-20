@@ -8,22 +8,28 @@ import Spinner from "../components/Spinner";
 import {useNavigate} from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import {userContext} from "../stores/userStore";
+import {appSettingContext} from "../stores/settingStore";
+import {HomeFilter, TimeRange} from "../app/common";
 
 export const Home = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [transactions, setTransactions] = useState<Summary[]>([]);
-    const [filter, setFilter] = useState<string>("All");
-    const [option, setOption] = useState<string>("This week");
+
+    const filter = appSettingContext((state) => state.homePageFilter);
+    const setFilter = appSettingContext((state) => state.setHomePageFilter);
+
+    const range = appSettingContext((state) => state.homePageRange);
+    const setRange = appSettingContext((state) => state.setHomePageRange);
 
     const navigate = useNavigate();
     const userId = userContext((state) => state.id);
 
     const getData = useCallback(async () => {
-        const since = option === "This week" ? "w" : option === "This month" ? "m" : "y";
+        const since = range === "This week" ? "w" : range === "This month" ? "m" : "y";
         const transactions = await getSummary(since);
         setTransactions(transactions);
         setIsLoading(false);
-    }, [option]);
+    }, [range]);
 
     const createNewTransaction = useCallback(() => {
         navigate("/transaction/new");
@@ -31,7 +37,7 @@ export const Home = () => {
 
     useEffect(() => {
         getData();
-    }, [option]);
+    }, [range]);
 
     const getBalance = () => {
         if (transactions.length === 0) return 0;
@@ -56,8 +62,8 @@ export const Home = () => {
         return <Spinner/>
     }
 
-    const onSelectDropdown = (option: string) => {
-        setOption(option);
+    const onSelectDropdown = (option: TimeRange) => {
+        setRange(option);
     }
 
     return (
@@ -72,15 +78,15 @@ export const Home = () => {
                 <div className="my-3">
                     <SegmentControl
                         segments={["All", "Income", "Expense"]}
-                        defaultSelected={"All"}
+                        defaultSelected={filter}
                         onSegmentChange={(segment) => {
-                            setFilter(segment);
+                            setFilter(segment as HomeFilter);
                         }}
                     />
                 </div>
                 <h2 className="text-2xl font-bold">Transactions</h2>
                 <div className="flex my-3">
-                    <Dropdown options={["This week", "This month", "This year"]} selectedOption={option}
+                    <Dropdown options={["This week", "This month", "This year"]} selectedOption={range}
                               setSelectedOption={onSelectDropdown}/>
                 </div>
             </div>
